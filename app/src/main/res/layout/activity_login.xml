@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loginViewMdel"
+            type="com.vehiclecare.vc_driver.viewmodels.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:cardBackgroundColor="@color/white"-->
+        <!--            app:cardCornerRadius="15dp"-->
+        <!--            app:cardElevation="15dp"-->
+        <!--            app:cardUseCompatPadding="true"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:paddingBottom="30dp">-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:fontFamily="sans-serif-condensed-medium"-->
+        <!--                    android:text="Enter Mobile Number To Continue"-->
+        <!--                    android:textColor="#193B68"-->
+        <!--                    android:textSize="16sp"-->
+        <!--                    app:layout_constraintBottom_toTopOf="@+id/tv_til"-->
+        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_til"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginStart="20dp"-->
+        <!--                    android:layout_marginBottom="10dp"-->
+        <!--                    android:fontFamily="sans-serif-condensed-medium"-->
+        <!--                    android:text="Mobile Number"-->
+        <!--                    android:textColor="#969696"-->
+        <!--                    android:textSize="14sp"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--                <EditText-->
+        <!--                    android:id="@+id/ed_number"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginStart="20dp"-->
+        <!--                    android:layout_marginBottom="10dp"-->
+        <!--                    android:background="@null"-->
+        <!--                    android:fontFamily="sans-serif-medium"-->
+        <!--                    android:hint="868789789"-->
+        <!--                    android:inputType="phone"-->
+        <!--                    android:text="@={loginViewMdel.userPhone}"-->
+        <!--                    android:textColor="#035A95"-->
+        <!--                    android:textStyle="bold"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                    app:layout_constraintStart_toEndOf="@+id/tv_til"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--                <View-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="1dp"-->
+        <!--                    android:background="@color/grey"-->
+        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="@+id/ed_number"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@+id/ed_number" />-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:id="@+id/mcv_continue"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginStart="20dp"-->
+        <!--                    android:layout_marginTop="40dp"-->
+        <!--                    android:layout_marginEnd="20dp"-->
+        <!--                    android:background="@drawable/round_btn"-->
+        <!--                    android:onClick="@{() -> loginViewMdel.onContinue()}"-->
+        <!--                    app:cardBackgroundColor="@color/design_default_color_secondary"-->
+        <!--                    app:cardElevation="20dp"-->
+        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@+id/ed_number">-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:background="?android:attr/selectableItemBackground"-->
+        <!--                        android:fontFamily="sans-serif-condensed"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:padding="10dp"-->
+        <!--                        android:text="Continue"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="16sp" />-->
+        <!--                </LinearLayout>-->
+
+        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+        <!--        </com.google.android.material.card.MaterialCardView>-->
+
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toTopOf="@+id/ed_lbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <EditText
+            android:id="@+id/ed_lbl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:backgroundTint="@android:color/white"
+            android:editable="false"
+            android:enabled="false"
+            android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/_20dp"
+            android:text="(+91) India"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
+
+
+        <EditText
+            android:id="@+id/ed_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginEnd="40dp"
+            android:backgroundTint="@android:color/white"
+
+            android:gravity="center_horizontal"
+            android:inputType="phone"
+            android:paddingBottom="@dimen/_20dp"
+            android:singleLine="true"
+            android:text="@={loginViewMdel.userPhone}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_lbl"
+            app:layout_constraintVertical_bias="0.7"
+            tools:text="(+91) India" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:onClick="@{() -> loginViewMdel.onContinue()}"
+            app:cardCornerRadius="@dimen/_20dp"
+            app:cardElevation="@dimen/dimen_5dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_number">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_30dp"
+                android:paddingEnd="@dimen/_30dp"
+                android:text="SEND OTP"
+                android:textColor="@color/red"
+                android:textStyle="bold" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
