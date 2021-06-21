@@ -1,0 +1,2 @@
+rootProject.name = "VC-Driver"
+include ':app'
