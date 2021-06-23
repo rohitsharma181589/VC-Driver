@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:741323015619:android:290a86b3cfcdf536f0a976",
+        "android_client_info": {
+          "package_name": "com.vehiclecare.vc_driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741323015619-nci2g4iv0eq4cs66kquc66bf65u0m9fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUHt-ZKMZ9_bj9Huqur7HbaSQaWb93wgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741323015619-nci2g4iv0eq4cs66kquc66bf65u0m9fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:741323015619:android:2b02717589aae1d0f0a976",
         "android_client_info": {
           "package_name": "com.vehiclecare.vc_driver_app"
@@ -14,11 +43,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "741323015619-32dt5rte72akbes2n2g20nomvh3danpv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vehiclecare.vc_driver_app",
+            "certificate_hash": "5a2d3ba9f4c4e78bca975da44f0c5b217462221e"
+          }
+        },
+        {
+          "client_id": "741323015619-7rp3irg57gn4vv9fc0o5fse039nm9lm9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vehiclecare.vc_driver_app",
+            "certificate_hash": "aa1d6fb04d2f4c998b98ac9401f1f97ac2f05af7"
+          }
+        },
+        {
           "client_id": "741323015619-afp088m9sd61ahqseic3us453su5dr2j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.vehiclecare.vc_driver_app",
             "certificate_hash": "bb2e51953034c5ce940f1a6127f1beadcf78194b"
+          }
+        },
+        {
+          "client_id": "741323015619-gnqu6b39cg2mquva852m15sedjvicdht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vehiclecare.vc_driver_app",
+            "certificate_hash": "a179b0d93cb813802e34f4ea17959d669c9447d0"
           }
         },
         {
