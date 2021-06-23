@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "741323015619",
+    "project_id": "vc-driver-f1c48",
+    "storage_bucket": "vc-driver-f1c48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741323015619:android:2b02717589aae1d0f0a976",
+        "android_client_info": {
+          "package_name": "com.vehiclecare.vc_driver_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741323015619-afp088m9sd61ahqseic3us453su5dr2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vehiclecare.vc_driver_app",
+            "certificate_hash": "bb2e51953034c5ce940f1a6127f1beadcf78194b"
+          }
+        },
+        {
+          "client_id": "741323015619-nci2g4iv0eq4cs66kquc66bf65u0m9fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUHt-ZKMZ9_bj9Huqur7HbaSQaWb93wgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741323015619-nci2g4iv0eq4cs66kquc66bf65u0m9fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

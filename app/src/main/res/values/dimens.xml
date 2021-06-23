@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="_150dp">150dp</dimen>
+    <!--RADIUS-->
+    <dimen name="radius_large">100dp</dimen>
+    <dimen name="radius_normal">30dp</dimen>
+    <dimen name="radius_small">3dp</dimen>
+    <!--RADIUS-->
+
+    <!--STROKE-->
+    <dimen name="stroke_normal">3dp</dimen>
+    <dimen name="stroke_big">5dp</dimen>
+    <!--STROKE-->
+
+    <dimen name="layout_height_normal_big">50dp</dimen>
+    <dimen name="margin_normal">20dp</dimen>
+    <dimen name="margin_smaller">7dp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="dimen_15dp">15dp</dimen>
     <dimen name="dimen_5dp">5dp</dimen>
-    <dimen name="_10dp">10dp</dimen>
-    <dimen name="dimen_20sp">20sp</dimen>
+    <dimen name="dimen_25dp">25dp</dimen>
+    <dimen name="dimen_35">35dp</dimen>
+    <dimen name="_25dp">25dp</dimen>
     <dimen name="_20dp">20dp</dimen>
+    <dimen name="_7dp">7dp</dimen>
+    <dimen name="_12sp">12sp</dimen>
+    <dimen name="_0dp">0dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
+    <dimen name="_18sp">18sp</dimen>
+    <dimen name="_1dp">1dp</dimen>
     <dimen name="_30dp">30dp</dimen>
+    <dimen name="_10dp">10dp</dimen>
+    <dimen name="dimen_16sp">16sp</dimen>
+    <dimen name="dimen_12sp">12sp</dimen>
+    <dimen name="dimen_14sp">14sp</dimen>
+    <dimen name="dimen_20sp">20sp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="_12dp">12dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
+    <dimen name="_8dp">8dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="_2dp">2dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+    <dimen name="dimen_22sp">22sp</dimen>
+    <dimen name="dimen_55">55dp</dimen>
+    <dimen name="dimen_75">75dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="dimen_85">85dp</dimen>
+    <dimen name="_18dp">18dp</dimen>
+    <dimen name="_35dp">35dp</dimen>
+    <dimen name="_15dp">15dp</dimen>
 </resources>

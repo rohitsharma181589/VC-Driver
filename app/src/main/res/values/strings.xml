@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">VC-Driver</string>
+    <string name="please_type_the_verification_code_sent_to_n_9xxxxxxx19">Please enter the verification code sent to your number</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="show_error">SHOW ERROR</string>
+    <string name="show_success">SHOW Success</string>
+    <string name="self_drop_n_i_will_drop_my_car_myself">Self Drop. I will drop my car myself</string>
+    <string name="menu_profile">Profile</string>
+    <string name="home">Home</string>
 </resources>

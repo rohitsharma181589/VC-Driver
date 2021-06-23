@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vehiclecare.vc_driver">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.vehiclecare.vc_driver_app">
 
     <application
+        android:name="com.vehiclecare.vc_driver_app.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VCDriver" />
+        android:theme="@style/Theme.VCDriver">
+
+
+        <activity
+            android:name="com.vehiclecare.vc_driver_app.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <!--        <activity android:name="com.vehiclecare.vc_driver.activity.LoginActivity">-->
+            <!--                    <activity android:name=".ui.fragments.activity.MainActivity">-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.vehiclecare.vc_driver_app.activity.LoginViaOtp"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.vehiclecare.vc_driver_app.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+
+
+    </application>
 
 </manifest>
