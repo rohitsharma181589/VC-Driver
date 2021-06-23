@@ -73,6 +73,18 @@ class LoginViaOtp : BaseActivity() {
 
         loginViaOtpViewModel.loginResponse.observe(this, {
 
+            if (null != it) {
+                if (it.responseCode.equals("602")) {
+                    //Send to Register Screen
+                    Toast.makeText(this@LoginViaOtp, it.message, Toast.LENGTH_LONG).show()
+                } else {
+                    if (it.status.equals("1") && it.responseCode.equals("200")) {
+                        //Move to Home Screen
+                        Toast.makeText(this@LoginViaOtp, it.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
             hideProgressDialog()
         })
 
@@ -149,13 +161,15 @@ class LoginViaOtp : BaseActivity() {
 
                     Toast.makeText(this@LoginViaOtp, "Success.", Toast.LENGTH_LONG)
                         .show()
-//                    loginViaOtpViewModel.calllLoginApi(phoneNumber)
+                    loginViaOtpViewModel.callLoginApi(phoneNumber)
 //                    startActivity(
 //                        Intent(
 //                            this@LoginViaOtp,
 //                            RegistrationActivity::class.java
 //                        )
 //                    ).also { finish() }
+
+                    hideProgressDialog()
                 } else {
                     hideProgressDialog()
                     //if the code is not correct then we are displaying an error message to the user.

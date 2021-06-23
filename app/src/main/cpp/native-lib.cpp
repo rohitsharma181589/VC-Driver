@@ -55,6 +55,7 @@ Java_com_vehiclecare_vc_1driver_1arvind_activity_BaseActivity_AccessCodeFromJNI(
 JNIEXPORT jstring JNICALL
 Java_com_vehiclecare_vc_1driver_1arvind_network_RetrofitClient_baseUrlFromJNI(JNIEnv *env,
                                                                               jclass clazz) {
-    std::string baseURL = "https://api.vehiclecare.in/";
+//    std::string baseURL = "https://api.vehiclecare.in/";
+    std::string baseURL = "https://devapi.vehiclecare.in/";
     return env->NewStringUTF(baseURL.c_str());
 }

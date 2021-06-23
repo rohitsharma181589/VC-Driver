@@ -1,5 +1,7 @@
 package com.vehiclecare.vc_driver_arvind.network
 
+import com.vehiclecare.vc_driver_arvind.model.BaseModel
+import com.vehiclecare.vc_driver_arvind.model.createDriver.CreateDriverResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -10,24 +12,31 @@ interface ApiInterface {
 
     @POST("/")
     @FormUrlEncoded
-    fun loginUser(
+    fun driverLogin(
         @Field("access_key") accessKey: String,
-        @Field("task") task: String,
-        @Field("state") state: String,
-        @Field("phone") phoneNumber: String
-    ): Call<Any>
+        @Field("phone") phoneNumber: String,
+        @Field("task") task: String = "driverLogin",
+        @Field("state") state: String = "acko_login",
+    ): Call<BaseModel>
 
     @POST("/")
     @FormUrlEncoded
-    fun createUser(
+    fun createDriver(
         @Field("access_key") accessKey: String,
-        @Field("task") task: String = "createUser",
-        @Field("state") state: String = "login",
-        @Field("phone") phoneNumber: String,
+        @Field("full_name") full_name: String,
         @Field("email") email: String,
-        @Field("first_name") firstName: String,
-        @Field("last_name") lastName: String,
-    ): Call<Any>
+        @Field("phone") phoneNumber: String,
+        @Field("gender") gender: String,
+        @Field("dob") dob: String,
+        @Field("address") address: String,
+        @Field("state_name") state_name: String,
+        @Field("city") city: String,
+        @Field("pincode") pincode: String,
+        @Field("license_number") license_number: String,
+        @Field("aadhar_number") aadhar_number: String,
+        @Field("task") task: String = "createDriver",
+        @Field("state") state: String = "acko_login",
+    ): Call<CreateDriverResponse>
 
 
 }
