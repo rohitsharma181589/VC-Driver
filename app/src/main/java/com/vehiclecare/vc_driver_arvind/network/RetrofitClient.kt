@@ -1,6 +1,6 @@
-package com.vehiclecare.vc_driver_app.network
+package com.vehiclecare.vc_driver_arvind.network
 
-import com.vehiclecare.vc_driver_app.BuildConfig
+import com.vehiclecare.vc_driver_arvind.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

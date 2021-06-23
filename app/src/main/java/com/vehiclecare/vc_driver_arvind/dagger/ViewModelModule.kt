@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.vehiclecare.vc_driver_app.dagger
+package com.vehiclecare.vc_driver_arvind.dagger
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vehiclecare.vc_driver_app.viewmodels.LoginViaOtpViewModel
-import com.vehiclecare.vc_driver_app.viewmodels.LoginViewModel
-import com.vehiclecare.vc_driver_app.viewmodels.ViewModelFactory
+import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViaOtpViewModel
+import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViewModel
+import com.vehiclecare.vc_driver_arvind.viewmodels.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

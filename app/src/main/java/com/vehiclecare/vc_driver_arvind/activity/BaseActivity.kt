@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app.activity
+package com.vehiclecare.vc_driver_arvind.activity
 
 import android.app.Dialog
 import android.content.Context
@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.vehiclecare.vc_driver_app.R
+import com.vehiclecare.vc_driver_arvind.R
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector

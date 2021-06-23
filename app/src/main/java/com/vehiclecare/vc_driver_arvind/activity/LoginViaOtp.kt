@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app.activity
+package com.vehiclecare.vc_driver_arvind.activity
 
 import `in`.aabhasjindal.otptextview.OTPListener
 import android.os.Bundle
@@ -11,9 +11,9 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
-import com.vehiclecare.vc_driver_app.R
-import com.vehiclecare.vc_driver_app.databinding.LoginViaOtpBinding
-import com.vehiclecare.vc_driver_app.viewmodels.LoginViaOtpViewModel
+import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.databinding.LoginViaOtpBinding
+import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViaOtpViewModel
 import java.util.concurrent.TimeUnit
 
 

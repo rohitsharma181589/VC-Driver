@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app.activity
+package com.vehiclecare.vc_driver_arvind.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import com.vehiclecare.vc_driver_app.R
-import com.vehiclecare.vc_driver_app.databinding.ActivityLoginBinding
-import com.vehiclecare.vc_driver_app.viewmodels.LoginViewModel
+import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.databinding.ActivityLoginBinding
+import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -35,7 +35,7 @@ class LoginActivity : BaseActivity()/*, HasAndroidInjector*/ {
         }
 
         activityLoginBinding.lifecycleOwner = this
-        activityLoginBinding.setVariable(com.vehiclecare.vc_driver_app.BR.loginViewMdel, model)
+        activityLoginBinding.setVariable(com.vehiclecare.vc_driver_arvind.BR.loginViewMdel, model)
         loginViewModel = model
         loginViewModel.loginClickSubject.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

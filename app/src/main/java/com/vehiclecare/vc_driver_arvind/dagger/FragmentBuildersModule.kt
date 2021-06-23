@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vehiclecare.vc_driver_app.dagger
+package com.vehiclecare.vc_driver_arvind.dagger
 
 import dagger.Module
 

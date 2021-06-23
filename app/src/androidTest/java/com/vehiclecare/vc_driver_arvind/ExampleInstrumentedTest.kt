@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app
+package com.vehiclecare.vc_driver_arvind
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

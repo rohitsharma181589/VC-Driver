@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.vehiclecare.vc_driver_app">
+    package="com.vehiclecare.vc_driver_arvind">
 
     <application
-        android:name="com.vehiclecare.vc_driver_app.MyApp"
+        android:name="com.vehiclecare.vc_driver_arvind.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
 
 
         <activity
-            android:name="com.vehiclecare.vc_driver_app.activity.SplashActivity"
+            android:name="com.vehiclecare.vc_driver_arvind.activity.SplashActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <!--        <activity android:name="com.vehiclecare.vc_driver.activity.LoginActivity">-->
@@ -27,11 +27,11 @@
         </activity>
 
         <activity
-            android:name="com.vehiclecare.vc_driver_app.activity.LoginViaOtp"
+            android:name="com.vehiclecare.vc_driver_arvind.activity.LoginViaOtp"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.vehiclecare.vc_driver_app.activity.LoginActivity"
+            android:name="com.vehiclecare.vc_driver_arvind.activity.LoginActivity"
             android:screenOrientation="portrait" />
 
 

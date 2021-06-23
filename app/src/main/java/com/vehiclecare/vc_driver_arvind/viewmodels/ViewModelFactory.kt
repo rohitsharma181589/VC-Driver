@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vehiclecare.vc_driver_app.viewmodels
+package com.vehiclecare.vc_driver_arvind.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

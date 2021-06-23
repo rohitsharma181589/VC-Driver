@@ -29,7 +29,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.vehiclecare.vc_driver_app"
+        applicationId "com.vehiclecare.vc_driver_arvind"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

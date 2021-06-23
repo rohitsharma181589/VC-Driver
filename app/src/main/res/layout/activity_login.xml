@@ -7,7 +7,7 @@
 
         <variable
             name="loginViewMdel"
-            type="com.vehiclecare.vc_driver_app.viewmodels.LoginViewModel" />
+            type="com.vehiclecare.vc_driver_arvind.viewmodels.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

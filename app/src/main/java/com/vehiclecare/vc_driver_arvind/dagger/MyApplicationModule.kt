@@ -1,8 +1,8 @@
-package com.vehiclecare.vc_driver_app.dagger
+package com.vehiclecare.vc_driver_arvind.dagger
 
-import com.vehiclecare.vc_driver_app.activity.LoginActivity
-import com.vehiclecare.vc_driver_app.activity.LoginViaOtp
-import com.vehiclecare.vc_driver_app.activity.SplashActivity
+import com.vehiclecare.vc_driver_arvind.activity.LoginActivity
+import com.vehiclecare.vc_driver_arvind.activity.LoginViaOtp
+import com.vehiclecare.vc_driver_arvind.activity.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

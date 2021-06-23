@@ -1,12 +1,12 @@
-package com.vehiclecare.vc_driver_app.activity
+package com.vehiclecare.vc_driver_arvind.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.vehiclecare.vc_driver_app.R
-import com.vehiclecare.vc_driver_app.utils.AppSharedPreference
+import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 
 class SplashActivity : AppCompatActivity() {
 

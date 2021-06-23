@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app.network
+package com.vehiclecare.vc_driver_arvind.network
 
 import retrofit2.Call
 import retrofit2.http.Field

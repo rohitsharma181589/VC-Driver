@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app.viewmodels
+package com.vehiclecare.vc_driver_arvind.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.subjects.PublishSubject

@@ -1,4 +1,4 @@
-package com.vehiclecare.vc_driver_app.utils
+package com.vehiclecare.vc_driver_arvind.utils
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,7 +1,7 @@
-package com.vehiclecare.vc_driver_app.viewmodels
+package com.vehiclecare.vc_driver_arvind.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import com.vehiclecare.vc_driver_app.activity.BaseActivity
+import com.vehiclecare.vc_driver_arvind.activity.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

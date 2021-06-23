@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.vehiclecare.vc_driver_app.dagger
+package com.vehiclecare.vc_driver_arvind.dagger
 
 import android.app.Application
-import com.vehiclecare.vc_driver_app.MyApp
+import com.vehiclecare.vc_driver_arvind.MyApp
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

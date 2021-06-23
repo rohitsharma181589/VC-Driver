@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vehiclecare.vc_driver_app.dagger
+package com.vehiclecare.vc_driver_arvind.dagger
 
 import android.app.Activity
 import android.app.Application
@@ -22,7 +22,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.vehiclecare.vc_driver_app.MyApp
+import com.vehiclecare.vc_driver_arvind.MyApp
 import dagger.android.AndroidInjection
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection

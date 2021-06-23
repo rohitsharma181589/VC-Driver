@@ -1,8 +1,8 @@
-package com.vehiclecare.vc_driver_app
+package com.vehiclecare.vc_driver_arvind
 
 import android.app.Application
-import com.vehiclecare.vc_driver_app.dagger.AppInjector
-import com.vehiclecare.vc_driver_app.utils.AppSharedPreference
+import com.vehiclecare.vc_driver_arvind.dagger.AppInjector
+import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
