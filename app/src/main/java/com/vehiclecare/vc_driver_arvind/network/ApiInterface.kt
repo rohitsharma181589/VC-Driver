@@ -1,6 +1,6 @@
 package com.vehiclecare.vc_driver_arvind.network
 
-import com.vehiclecare.vc_driver_arvind.model.BaseModel
+import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
 import com.vehiclecare.vc_driver_arvind.model.createDriver.CreateDriverResponse
 import com.vehiclecare.vc_driver_arvind.model.login.LoginDriverResponse
 import retrofit2.Call
@@ -19,6 +19,17 @@ interface ApiInterface {
         @Field("task") task: String = "driverLogin",
         @Field("state") state: String = "acko_login",
     ): Call<LoginDriverResponse>
+
+    @POST("/")
+    @FormUrlEncoded
+    fun ackoLogin(
+        @Field("access_key") accessKey: String,
+        @Field("phone") phoneNumber: String,
+        @Field("user_id") user_id: String,
+        @Field("token") token: String,
+        @Field("task") task: String = "ackoLogin",
+        @Field("state") state: String = "ackoPostLogin",
+    ): Call<AckoLoginResponse>
 
     @POST("/")
     @FormUrlEncoded

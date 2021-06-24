@@ -30,4 +30,18 @@ class HomeActivity : BaseActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        homeViewModel.ackoLogin()
+
+
+        homeViewModel.callBack.observe(this, {
+
+            if (it)
+                showProgressDialog()
+            else hideProgressDialog()
+        })
+    }
+
 }
