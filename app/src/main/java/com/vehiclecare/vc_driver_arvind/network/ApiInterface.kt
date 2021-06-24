@@ -2,6 +2,7 @@ package com.vehiclecare.vc_driver_arvind.network
 
 import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.createDriver.CreateDriverResponse
+import com.vehiclecare.vc_driver_arvind.model.login.LoginDriverResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -17,7 +18,7 @@ interface ApiInterface {
         @Field("phone") phoneNumber: String,
         @Field("task") task: String = "driverLogin",
         @Field("state") state: String = "acko_login",
-    ): Call<BaseModel>
+    ): Call<LoginDriverResponse>
 
     @POST("/")
     @FormUrlEncoded

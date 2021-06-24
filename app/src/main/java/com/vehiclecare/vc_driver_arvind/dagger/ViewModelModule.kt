@@ -17,9 +17,7 @@ package com.vehiclecare.vc_driver_arvind.dagger
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViaOtpViewModel
-import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViewModel
-import com.vehiclecare.vc_driver_arvind.viewmodels.ViewModelFactory
+import com.vehiclecare.vc_driver_arvind.viewmodels.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -46,15 +44,16 @@ abstract class ViewModelModule {
     @ViewModelKey(LoginViaOtpViewModel::class)
     abstract fun loginViaOtpViewModel(loginViaOtpViewModel: LoginViaOtpViewModel): ViewModel
 
-    //    @Binds
-//    @IntoMap
-//    @ViewModelKey(RegistrationViewModel::class)
-//    abstract fun bindRepoViewModel(registrationViewModel: RegistrationViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(HomeViewModel::class)
-//    abstract fun fragmentHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegistrationViewModel::class)
+    abstract fun bindRepoViewModel(registrationViewModel: RegistrationViewModel): ViewModel
+
+    //
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun fragmentHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

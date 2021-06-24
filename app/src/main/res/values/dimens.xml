@@ -52,4 +52,6 @@
     <dimen name="_18dp">18dp</dimen>
     <dimen name="_35dp">35dp</dimen>
     <dimen name="_15dp">15dp</dimen>
+    <dimen name="_24sp">24sp</dimen>
+    <dimen name="_22sp">22sp</dimen>
 </resources>

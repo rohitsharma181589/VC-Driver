@@ -9,11 +9,11 @@ import kotlinx.parcelize.Parcelize
 class User : Parcelable {
     @SerializedName("user_id")
     @Expose
-    var userId = 0
+    var userId = ""
 
     @SerializedName("email")
     @Expose
-    var email: String? = null
+    var email: String = ""
 
     @SerializedName("phone")
     @Expose
@@ -21,7 +21,7 @@ class User : Parcelable {
 
     @SerializedName("full_name")
     @Expose
-    var fullName: String? = null
+    var fullName: String = ""
 
     @SerializedName("gender")
     @Expose
@@ -57,5 +57,5 @@ class User : Parcelable {
 
     @SerializedName("token")
     @Expose
-    var token: String? = null
+    var token: String = ""
 }

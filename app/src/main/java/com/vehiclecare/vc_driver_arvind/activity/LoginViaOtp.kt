@@ -1,6 +1,7 @@
 package com.vehiclecare.vc_driver_arvind.activity
 
 import `in`.aabhasjindal.otptextview.OTPListener
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -13,6 +14,8 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.databinding.LoginViaOtpBinding
+import com.vehiclecare.vc_driver_arvind.model.login.User
+import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import com.vehiclecare.vc_driver_arvind.viewmodels.LoginViaOtpViewModel
 import java.util.concurrent.TimeUnit
 
@@ -77,10 +80,29 @@ class LoginViaOtp : BaseActivity() {
                 if (it.responseCode.equals("602")) {
                     //Send to Register Screen
                     Toast.makeText(this@LoginViaOtp, it.message, Toast.LENGTH_LONG).show()
+
+                    AppSharedPreference.saveStringValue(AppSharedPreference.USER_PHONE, phoneNumber)
+                    startActivity(
+                        Intent(
+                            this@LoginViaOtp,
+                            RegistrationActivity::class.java
+                        )
+                    ).also { finish() }
                 } else {
                     if (it.status.equals("1") && it.responseCode.equals("200")) {
                         //Move to Home Screen
                         Toast.makeText(this@LoginViaOtp, it.message, Toast.LENGTH_LONG).show()
+
+
+                        if (null != it.loginData?.user)
+                            saveUserData(it.loginData?.user!!)
+
+                        startActivity(
+                            Intent(
+                                this@LoginViaOtp,
+                                HomeActivity::class.java
+                            )
+                        ).also { finish() }
                     }
                 }
             }
@@ -162,12 +184,7 @@ class LoginViaOtp : BaseActivity() {
                     Toast.makeText(this@LoginViaOtp, "Success.", Toast.LENGTH_LONG)
                         .show()
                     loginViaOtpViewModel.callLoginApi(phoneNumber)
-//                    startActivity(
-//                        Intent(
-//                            this@LoginViaOtp,
-//                            RegistrationActivity::class.java
-//                        )
-//                    ).also { finish() }
+
 
                     hideProgressDialog()
                 } else {
@@ -213,5 +230,34 @@ class LoginViaOtp : BaseActivity() {
 
         showProgressDialog()
 
+    }
+
+    private fun saveUserData(it: User) {
+
+        AppSharedPreference.saveBooleanValue(
+            AppSharedPreference.IS_USER_LOGGED_IN,
+            true
+        )
+
+        AppSharedPreference.saveStringValue(
+            AppSharedPreference.USER_ID,
+            it.userId
+        )
+        AppSharedPreference.saveStringValue(
+            AppSharedPreference.USER_TOKEN,
+            it.token
+        )
+        AppSharedPreference.saveStringValue(
+            AppSharedPreference.USER_Name,
+            it.fullName
+        )
+        AppSharedPreference.saveStringValue(
+            AppSharedPreference.USER_EMail,
+            it.email
+        )
+        AppSharedPreference.saveStringValue(
+            AppSharedPreference.USER_PHONE,
+            it.phone
+        )
     }
 }

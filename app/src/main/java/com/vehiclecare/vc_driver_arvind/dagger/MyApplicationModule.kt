@@ -1,8 +1,6 @@
 package com.vehiclecare.vc_driver_arvind.dagger
 
-import com.vehiclecare.vc_driver_arvind.activity.LoginActivity
-import com.vehiclecare.vc_driver_arvind.activity.LoginViaOtp
-import com.vehiclecare.vc_driver_arvind.activity.SplashActivity
+import com.vehiclecare.vc_driver_arvind.activity.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -33,6 +31,9 @@ abstract class MyApplicationModule {
     @ContributesAndroidInjector
     abstract fun loginViaOtpActivity(): LoginViaOtp
 
-//    @ContributesAndroidInjector
-//    abstract fun registrationActivity(): RegistrationActivity
+    @ContributesAndroidInjector
+    abstract fun registrationActivity(): RegistrationActivity
+
+    @ContributesAndroidInjector
+    abstract fun homeActivity(): HomeActivity
 }

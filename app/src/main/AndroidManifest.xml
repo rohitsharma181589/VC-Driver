@@ -33,6 +33,8 @@
         <activity
             android:name="com.vehiclecare.vc_driver_arvind.activity.LoginActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.RegistrationActivity" />
 
 
     </application>

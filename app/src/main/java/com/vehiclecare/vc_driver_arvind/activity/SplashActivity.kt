@@ -19,13 +19,11 @@ class SplashActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Handler(Looper.myLooper()!!).postDelayed({ navigateToActivity() }, 1000)
-
-
     }
 
     private fun navigateToActivity() {
         if (AppSharedPreference.getBooleanValue(AppSharedPreference.IS_USER_LOGGED_IN)!!) {
-//            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         } else {

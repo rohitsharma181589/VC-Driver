@@ -19,6 +19,7 @@ object AppSharedPreference {
     const val USER_TOKEN = "USER_TOKEN"
     const val USER_FName = "USER_FName"
     const val USER_LName = "USER_LName"
+    const val USER_Name = "USER_Name"
     const val USER_EMail = "USER_EMail"
     const val USER_ID = "USER_ID"
     const val USER_PHONE = "USER_PHONE"
