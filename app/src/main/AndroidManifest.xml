@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.vehiclecare.vc_driver_arvind">
 
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.vehiclecare.vc_driver_arvind.MyApp"
         android:allowBackup="true"
@@ -33,9 +38,19 @@
         <activity
             android:name="com.vehiclecare.vc_driver_arvind.activity.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.RegistrationActivity" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MapActivity"
+            android:screenOrientation="portrait" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
 
     </application>
 

@@ -1,5 +1,6 @@
 package com.vehiclecare.vc_driver_arvind.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -42,6 +43,13 @@ class HomeActivity : BaseActivity() {
                 showProgressDialog()
             else hideProgressDialog()
         })
+
+
+        homeActivityBinding.btnStartNewTrip.setOnClickListener {
+
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

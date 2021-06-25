@@ -54,6 +54,13 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun fragmentHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MapViewModel::class)
+    abstract fun fragmentMapViewModel(mapViewModel: MapViewModel): ViewModel
+
+
 //
 //    @Binds
 //    @IntoMap

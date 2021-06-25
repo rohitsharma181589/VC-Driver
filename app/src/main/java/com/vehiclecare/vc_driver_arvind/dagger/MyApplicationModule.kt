@@ -36,4 +36,7 @@ abstract class MyApplicationModule {
 
     @ContributesAndroidInjector
     abstract fun homeActivity(): HomeActivity
+
+    @ContributesAndroidInjector
+    abstract fun mapActivity(): MapActivity
 }
