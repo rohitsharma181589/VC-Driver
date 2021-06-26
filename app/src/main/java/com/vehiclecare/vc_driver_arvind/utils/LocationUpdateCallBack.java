@@ -10,4 +10,5 @@ public interface LocationUpdateCallBack {
     void fetchedAddress(Address address);
     void currentLocation(Location location);
     void onError(String msg);
+    void markerAddress(Address address);
 }

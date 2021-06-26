@@ -250,5 +250,24 @@ public class LocationHelper {
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
+    public void getAddressForLatLong(Location location) {
+        List<Address> addresses;
+        try {
+            addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
+
+            if (addresses.size() > 0) {
+                for (Address address : addresses) {
+                    if (address.getLocality() != null && address.getPostalCode() != null) {
+                        if (locationUpdateCallBack != null)
+                            locationUpdateCallBack.markerAddress(address);
+                        break;
+                    }
+                }
+            } else locationUpdateCallBack.onError("Cant not get marker location");
+        } catch (IOException e) {
+            locationUpdateCallBack.onError("Cant not get marker location");
+        }
+    }
+
 
 }

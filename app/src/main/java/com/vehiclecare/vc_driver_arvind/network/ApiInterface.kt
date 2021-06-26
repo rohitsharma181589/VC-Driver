@@ -1,5 +1,6 @@
 package com.vehiclecare.vc_driver_arvind.network
 
+import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
 import com.vehiclecare.vc_driver_arvind.model.createDriver.CreateDriverResponse
 import com.vehiclecare.vc_driver_arvind.model.login.LoginDriverResponse
@@ -49,6 +50,26 @@ interface ApiInterface {
         @Field("task") task: String = "createDriver",
         @Field("state") state: String = "acko_login",
     ): Call<CreateDriverResponse>
+
+
+    /**
+     * {"latitude":"28.701984","longitude":"77.078873","address":"demo address string","city":"Delhi"}
+     */
+    @POST("/")
+    @FormUrlEncoded
+    fun createAckoVehicleRide(
+        @Field("user_id") user_id: String,
+        @Field("access_key") accessKey: String,
+        @Field("token") token: String,
+        @Field("authorization_token") authorization_token: String,
+        @Field("trip_start_time") trip_start_time: String,
+        @Field("trip_category") trip_category: String,
+        @Field("vehicle_plate_number") vehicle_plate_number: String,
+        @Field("trip_origin") trip_origin: String,
+        @Field("trip_destination") trip_destination: String,
+        @Field("task") task: String = "createAckoVehicleRide",
+        @Field("state") state: String = "ackoPostLogin",
+    ): Call<BaseModel>
 
 
 }

@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.databinding.HomeActivityBinding
 import com.vehiclecare.vc_driver_arvind.viewmodels.HomeViewModel
+import java.util.*
 
 class HomeActivity : BaseActivity() {
 
@@ -35,6 +36,9 @@ class HomeActivity : BaseActivity() {
         super.onStart()
 
         homeViewModel.ackoLogin()
+
+
+
 
 
         homeViewModel.callBack.observe(this, {

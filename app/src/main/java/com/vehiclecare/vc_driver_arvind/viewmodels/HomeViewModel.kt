@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
                         !TextUtils.isEmpty(response.body()?.data?.ackoData?.accessToken)
                     ) {
                         AppSharedPreference.saveStringValue(
-                            AppSharedPreference.TOKEN_AUTHORIZATION,
+                            AppSharedPreference.USER_ACKO_AUTHORIZATION,
                             response.body()?.data?.ackoData?.accessToken!!
                         )
                     }

@@ -6,21 +6,20 @@ import android.content.Intent
 import android.location.Address
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.vehiclecare.vc_driver_arvind.BuildConfig
 import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.activity.fragments.BottomSheetFragment
 import com.vehiclecare.vc_driver_arvind.databinding.MapActivityLayoutBinding
 import com.vehiclecare.vc_driver_arvind.utils.LocationHelper
 import com.vehiclecare.vc_driver_arvind.utils.LocationUpdateCallBack
@@ -28,7 +27,8 @@ import com.vehiclecare.vc_driver_arvind.viewmodels.MapViewModel
 
 
 class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
-    GoogleMap.OnCameraMoveStartedListener {
+    GoogleMap.OnMapLongClickListener,
+    GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener {
 
     private lateinit var mapViewModel: MapViewModel
     private lateinit var mapActivityLayoutBinding: MapActivityLayoutBinding
@@ -37,6 +37,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     private lateinit var mLocation: Location
     private val zoomLevel = 14f
     private val TAG = MapActivity::class.java.canonicalName
+
+    lateinit var bottomSheetFragment: BottomSheetFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +59,7 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
 
         if (!Places.isInitialized()) {
-            Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY);
+            Places.initialize(applicationContext, BuildConfig.MAPS_PLACES_API_KEY);
         }
 
         val placesClient = Places.createClient(this)
@@ -67,21 +69,21 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        val placedFragent =
-            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
-        placedFragent.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
-
-        placedFragent.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-                mapActivityLayoutBinding.tvPlaces.text = place.name
-                Log.i(TAG, "Place: " + place.name + ", " + place.id)
-            }
-
-            override fun onError(status: Status) {
-
-                Log.i(TAG, "An error occurred: $status")
-            }
-        })
+//        val placedFragent =
+//            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
+//        placedFragent.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+//
+//        placedFragent.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+//            override fun onPlaceSelected(place: Place) {
+//                mapActivityLayoutBinding.tvPlaces.text = place.name
+//                Log.i(TAG, "Place: " + place.name + ", " + place.id)
+//            }
+//
+//            override fun onError(status: Status) {
+//
+//                Log.i(TAG, "An error occurred: $status")
+//            }
+//        })
 
         locationHelper.startLocationButtonClick()
         showProgressDialog()
@@ -93,20 +95,54 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         super.onStart()
 
 
+        mapViewModel.clickAction.observe(this, {
+            if (it) {
+                mapViewModel.statTrip()
+            }
+        })
+//
+//        mapViewModel.tripType.observe(this, {
+//
+//        })
+//
+//        mapViewModel.vehicle_plate_number.observe(this, {
+//
+//        })
+
+        mapViewModel.startAction.observe(this, {
+            if (it)
+                showProgressDialog()
+            else hideProgressDialog()
+
+        })
+        mapViewModel.errorMsg.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+        mapViewModel.successMsg.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            finish()
+        })
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        mMap.setOnMapLongClickListener(this)
 
     }
 
     override fun fetchedAddress(address: Address?) {
-
+        if (address != null) {
+            mapViewModel.startAddress = address
+        };
     }
 
     @SuppressLint("MissingPermission")
     override fun currentLocation(location: Location?) {
+        if (location != null) {
+            mapViewModel.startLatLong = location
+        }
         hideProgressDialog()
         if (location != null) {
             mLocation = location
@@ -117,8 +153,12 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
                 mMap.isMyLocationEnabled = true
                 mMap.uiSettings.isCompassEnabled = true
                 mMap.setOnCameraMoveStartedListener(this)
+                mMap.setOnCameraIdleListener(this)
 
             }
+
+            bottomSheetFragment = BottomSheetFragment(mapViewModel)
+//            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
 
@@ -126,6 +166,12 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         hideProgressDialog()
 //        if (!TextUtils.isEmpty(msg))
 //            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun markerAddress(address: Address?) {
+        if (address != null) {
+            mapViewModel.destLatLongAddress = address
+        }
     }
 
     override fun onCameraMoveStarted(p0: Int) {
@@ -140,6 +186,29 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
             showProgressDialog()
             (locationHelper.startLocationButtonClick())
         }
+    }
+
+    override fun onMapLongClick(ltlng: LatLng) {
+
+        mapViewModel.destLatLong = Location("")
+        mapViewModel.destLatLong.latitude = ltlng.latitude
+        mapViewModel.destLatLong.longitude = ltlng.longitude
+
+        mMap.addMarker(
+            MarkerOptions()
+                .position(ltlng)
+                .title("Destination")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+        )
+
+        locationHelper.getAddressForLatLong(mapViewModel.destLatLong);
+    }
+
+    override fun onCameraIdle() {
+        if (::bottomSheetFragment.isInitialized)
+            if (!bottomSheetFragment.isAdded) {
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            }
     }
 
 

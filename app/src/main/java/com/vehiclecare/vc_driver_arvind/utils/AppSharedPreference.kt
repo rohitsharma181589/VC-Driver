@@ -17,7 +17,7 @@ object AppSharedPreference {
 
     const val IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN"
     const val USER_TOKEN = "USER_TOKEN"
-    const val TOKEN_AUTHORIZATION = "TOKEN_AUTHORIZATION"
+    const val USER_ACKO_AUTHORIZATION = "USER_ACKO_AUTHORIZATION"
     const val USER_FName = "USER_FName"
     const val USER_LName = "USER_LName"
     const val USER_Name = "USER_Name"
