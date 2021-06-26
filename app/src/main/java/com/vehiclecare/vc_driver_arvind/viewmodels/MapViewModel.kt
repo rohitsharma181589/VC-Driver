@@ -6,7 +6,7 @@ import android.location.Location
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.vehiclecare.vc_driver_arvind.activity.BaseActivity
-import com.vehiclecare.vc_driver_arvind.model.BaseModel
+import com.vehiclecare.vc_driver_arvind.model.tripStartData.TripStartResponse
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import org.json.JSONObject
 import retrofit2.Call
@@ -59,12 +59,12 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
             return
         }
 
-        if (!::startAddress.isInitialized ) {
+        if (!::startAddress.isInitialized) {
             errorMsg.postValue("Something went wrong in getting locations, please try again")
             return
         }
 
-        if ( !::destLatLongAddress.isInitialized){
+        if (!::destLatLongAddress.isInitialized) {
             errorMsg.postValue("Please create destination marker location in map, by long pressing")
             return
         }
@@ -78,7 +78,7 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
         val tripDestination = JSONObject()
         tripDestination.put("latitude", destLatLongAddress.latitude)
         tripDestination.put("longitude", destLatLongAddress.longitude)
-        tripDestination.put("address",  destLatLongAddress.getAddressLine(0))
+        tripDestination.put("address", destLatLongAddress.getAddressLine(0))
         tripDestination.put("city", destLatLongAddress.locality)
 
 
@@ -92,11 +92,19 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
             time.toString(),
             tripType.value!!,
             vehicle_plate_number.value!!, tripOrigin.toString(), tripDestination.toString()
-        ).enqueue(object : Callback<BaseModel> {
-            override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
+        ).enqueue(object : Callback<TripStartResponse> {
+            override fun onResponse(
+                call: Call<TripStartResponse>,
+                response: Response<TripStartResponse>
+            ) {
                 startAction.postValue(false)
                 if (response.body()?.status.equals("1") && response.body()?.responseCode.equals("200")) {
                     successMsg.postValue("Trip is started")
+
+                    AppSharedPreference.saveStringValue(
+                        AppSharedPreference.TRIP_ID,
+                        response.body()?.data?.tripData?.trip_id.toString()
+                    )
                 } else if (!TextUtils.isEmpty(response.body()?.message)) {
                     errorMsg.postValue(response.body()?.message)
 
@@ -104,7 +112,7 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
 
             }
 
-            override fun onFailure(call: Call<BaseModel>, t: Throwable) {
+            override fun onFailure(call: Call<TripStartResponse>, t: Throwable) {
                 startAction.postValue(false)
                 errorMsg.postValue("Something went wrong, please try again")
             }

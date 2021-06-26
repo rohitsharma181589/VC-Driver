@@ -29,6 +29,7 @@ object AppSharedPreference {
     const val BRANDS_LIST = "brands_list"
     const val MODELS_LIST = "models_list"
     const val FOR_EDIT = "for_edit"
+    const val TRIP_ID = "trip_id"
 
     fun initializePreference(context: Context) {
         try {

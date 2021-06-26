@@ -4,6 +4,7 @@ import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
 import com.vehiclecare.vc_driver_arvind.model.createDriver.CreateDriverResponse
 import com.vehiclecare.vc_driver_arvind.model.login.LoginDriverResponse
+import com.vehiclecare.vc_driver_arvind.model.tripStartData.TripStartResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -69,7 +70,20 @@ interface ApiInterface {
         @Field("trip_destination") trip_destination: String,
         @Field("task") task: String = "createAckoVehicleRide",
         @Field("state") state: String = "ackoPostLogin",
-    ): Call<BaseModel>
+    ): Call<TripStartResponse>
 
+
+    @POST("/")
+    @FormUrlEncoded
+    fun endAckoVehicleRide(
+        @Field("access_key") accessKey: String,
+        @Field("user_id") user_id: String,
+        @Field("authorization_token") authorization_token: String,
+        @Field("token") token: String,
+        @Field("trip_id") trip_id: String,
+        @Field("trip_end_date") trip_end_date: String,
+        @Field("task") task: String = "endAckoVehicleRide",
+        @Field("state") state: String = "ackoPostLogin",
+    ): Call<BaseModel>
 
 }

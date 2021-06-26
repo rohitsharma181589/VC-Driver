@@ -6,6 +6,7 @@ import android.content.Intent
 import android.location.Address
 import android.location.Location
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -116,11 +117,14 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
         })
         mapViewModel.errorMsg.observe(this, {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            if (!TextUtils.isEmpty(it))
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         mapViewModel.successMsg.observe(this, {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            finish()
+            if (!TextUtils.isEmpty(it)) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                finish()
+            }
         })
 
     }
