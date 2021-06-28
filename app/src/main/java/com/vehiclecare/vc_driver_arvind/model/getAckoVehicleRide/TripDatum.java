@@ -35,7 +35,7 @@ public class TripDatum {
     public String tripId;
     @SerializedName("end_date")
     @Expose
-    public Object endDate;
+    public String endDate;
     @SerializedName("status")
     @Expose
     public String status;
@@ -52,7 +52,7 @@ public class TripDatum {
     }
 
     public String getStartDate() {
-        return startDate;
+        return "Start Date: " + startDate;
     }
 
     public void setStartDate(String startDate) {
@@ -60,7 +60,7 @@ public class TripDatum {
     }
 
     public String getTripCategory() {
-        return tripCategory;
+        return "Trip Category: " + tripCategory;
     }
 
     public void setTripCategory(String tripCategory) {
@@ -68,7 +68,7 @@ public class TripDatum {
     }
 
     public String getLicensePlateNumber() {
-        return licensePlateNumber;
+        return "Licence Plate No: " + licensePlateNumber;
     }
 
     public void setLicensePlateNumber(String licensePlateNumber) {
@@ -107,11 +107,11 @@ public class TripDatum {
         this.tripId = tripId;
     }
 
-    public Object getEndDate() {
-        return endDate;
+    public String getEndDate() {
+        return "End Date: " + endDate;
     }
 
-    public void setEndDate(Object endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

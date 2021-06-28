@@ -2,13 +2,18 @@ package com.vehiclecare.vc_driver_arvind.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.activity.adapter.TripAdapter
 import com.vehiclecare.vc_driver_arvind.activity.callbacks.HomeCallback
 import com.vehiclecare.vc_driver_arvind.databinding.HomeActivityBinding
+import com.vehiclecare.vc_driver_arvind.model.getAckoVehicleRide.TripDatum
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import com.vehiclecare.vc_driver_arvind.viewmodels.HomeViewModel
 
@@ -18,6 +23,8 @@ class HomeActivity : BaseActivity(), HomeCallback {
     private lateinit var homeViewModel: HomeViewModel
     var canStartNewTrip = false
     var tripId = ""
+    private lateinit var tripAdapter: TripAdapter
+    var tripListAdapter = ArrayList<TripDatum>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +44,23 @@ class HomeActivity : BaseActivity(), HomeCallback {
 
         homeViewModel.homeCallback = this
 
+
+        tripAdapter = TripAdapter(tripListAdapter)
+        homeActivityBinding.rcvTrips.adapter = tripAdapter
+        homeActivityBinding.rcvTrips.layoutManager = LinearLayoutManager(this)
+
+
     }
 
     override fun onStart() {
         super.onStart()
+        homeActivityBinding.edSearch.text.clear()
+        homeActivityBinding.edSearch.clearFocus()
+        val userName = AppSharedPreference.getStringValue(AppSharedPreference.USER_Name)
+        homeActivityBinding.tvHeader.text = "Welcome: $userName"
 
         homeViewModel.ackoLogin()
+        homeViewModel.getAckoVehicleRide()
 
         homeViewModel.callBack.observe(this, {
 
@@ -58,6 +76,10 @@ class HomeActivity : BaseActivity(), HomeCallback {
             Toast.makeText(this, "btn click", Toast.LENGTH_LONG).show()
             handleTripEvent()
 
+        }
+
+        homeActivityBinding.tvLogout.setOnClickListener {
+            logoutAndClearData()
         }
 
 
@@ -78,6 +100,27 @@ class HomeActivity : BaseActivity(), HomeCallback {
 //                checkStartBtnState()
 //            }
 //        })
+
+
+        homeActivityBinding.edSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                tripAdapter.filter.filter(s.toString());
+            }
+
+        })
+
+
+        homeActivityBinding.ivClearSearch.setOnClickListener {
+            homeActivityBinding.edSearch.text.clear()
+        }
     }
 
     fun checkStartBtnState() {
@@ -116,5 +159,12 @@ class HomeActivity : BaseActivity(), HomeCallback {
         Toast.makeText(this, "Trip Ended", Toast.LENGTH_SHORT).show()
         checkStartBtnState()
     }
+
+    override fun tripListData(tripLst: MutableList<TripDatum>) {
+        tripListAdapter.clear()
+        tripListAdapter.addAll(tripLst)
+        tripAdapter.notifyDataSetChanged()
+    }
+
 
 }

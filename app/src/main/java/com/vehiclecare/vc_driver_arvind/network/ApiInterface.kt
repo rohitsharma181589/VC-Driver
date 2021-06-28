@@ -3,6 +3,7 @@ package com.vehiclecare.vc_driver_arvind.network
 import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
 import com.vehiclecare.vc_driver_arvind.model.createDriver.CreateDriverResponse
+import com.vehiclecare.vc_driver_arvind.model.getAckoVehicleRide.GetAckoVehicleRideResponse
 import com.vehiclecare.vc_driver_arvind.model.login.LoginDriverResponse
 import com.vehiclecare.vc_driver_arvind.model.tripStartData.TripStartResponse
 import retrofit2.Call
@@ -85,5 +86,15 @@ interface ApiInterface {
         @Field("task") task: String = "endAckoVehicleRide",
         @Field("state") state: String = "ackoPostLogin",
     ): Call<BaseModel>
+
+    @POST("/")
+    @FormUrlEncoded
+    fun getAckoVehicleRide(
+        @Field("access_key") accessKey: String,
+        @Field("user_id") user_id: String,
+        @Field("token") token: String,
+        @Field("task") task: String = "getAckoVehicleRide",
+        @Field("state") state: String = "ackoPostLogin",
+    ): Call<GetAckoVehicleRideResponse>
 
 }

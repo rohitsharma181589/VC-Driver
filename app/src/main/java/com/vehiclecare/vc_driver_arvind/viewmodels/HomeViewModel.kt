@@ -7,6 +7,7 @@ import com.vehiclecare.vc_driver_arvind.activity.BaseActivity
 import com.vehiclecare.vc_driver_arvind.activity.callbacks.HomeCallback
 import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
+import com.vehiclecare.vc_driver_arvind.model.getAckoVehicleRide.GetAckoVehicleRideResponse
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import retrofit2.Call
 import retrofit2.Callback
@@ -119,6 +120,50 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
             }
 
         })
+    }
+
+
+    fun getAckoVehicleRide() {
+
+        val user_id = AppSharedPreference.getStringValue(AppSharedPreference.USER_ID)
+        val token = AppSharedPreference.getStringValue(AppSharedPreference.USER_TOKEN)
+
+        if (TextUtils.isEmpty(user_id)) {
+            errorMsg.postValue("Session is expired, Please login")
+            return
+        }
+
+        if (TextUtils.isEmpty(token)) {
+            errorMsg.postValue("Session is expired, Please login")
+            return
+        }
+
+        apiServiceRetorfit.getAckoVehicleRide(BaseActivity.AccessCodeFromJNI(), user_id!!, token!!)
+            .enqueue(object : Callback<GetAckoVehicleRideResponse> {
+                override fun onResponse(
+                    call: Call<GetAckoVehicleRideResponse>,
+                    response: Response<GetAckoVehicleRideResponse>
+                ) {
+                    if (response.body()?.status.equals("1")
+                        && response.body()?.responseCode.equals(
+                            "200"
+                        )
+                    ) {
+                        if (response.body()?.data?.tripData != null && response.body()?.data?.tripData!!.size > 0) {
+                            homeCallback.tripListData(response.body()?.data?.tripData!!)
+                        } else if (!TextUtils.isEmpty(response.body()?.message)) {
+                            errorMsg.postValue("No Trip Data Found")
+                        }
+                    } else errorMsg.postValue("Something went wrong, please try again")
+                }
+
+                override fun onFailure(call: Call<GetAckoVehicleRideResponse>, t: Throwable) {
+                    startAction.postValue(false)
+                    errorMsg.postValue("Something went wrong, please try again")
+                }
+
+            })
+
     }
 
 }

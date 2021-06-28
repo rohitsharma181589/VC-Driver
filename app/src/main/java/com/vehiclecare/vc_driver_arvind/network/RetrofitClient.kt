@@ -1,8 +1,11 @@
 package com.vehiclecare.vc_driver_arvind.network
 
 import com.vehiclecare.vc_driver_arvind.BuildConfig
+import com.vehiclecare.vc_driver_arvind.model.LogoutModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.greenrobot.eventbus.EventBus
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -46,17 +49,17 @@ object RetrofitClient {
 //        httpClient.addInterceptor(responseInterceptor)
 
         //TODO: handle chain
-//        httpClient.addInterceptor { chain ->
-//            val request = chain.request()
-//            val response = chain.proceed(request)
-//            val responseBodyCopy = response.peekBody(Long.MAX_VALUE)
-//            val bodyResponse = responseBodyCopy.string()
-//            val jsonResponse = JSONObject(bodyResponse)
-////            if (jsonResponse.get("response_code").equals("300")) {
-////                EventBus.getDefault().post(LogoutModel(true))
-////            }
-//            response
-//        }
+        httpClient.addInterceptor { chain ->
+            val request = chain.request()
+            val response = chain.proceed(request)
+            val responseBodyCopy = response.peekBody(Long.MAX_VALUE)
+            val bodyResponse = responseBodyCopy.string()
+            val jsonResponse = JSONObject(bodyResponse)
+            if (jsonResponse.get("response_code").equals("300")) {
+                EventBus.getDefault().post(LogoutModel(true))
+            }
+            response
+        }
 
 
         if (!::INSTANCE.isInitialized) {
