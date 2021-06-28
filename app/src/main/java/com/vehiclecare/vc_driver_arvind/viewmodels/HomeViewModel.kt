@@ -4,6 +4,7 @@ import android.icu.util.Calendar
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.vehiclecare.vc_driver_arvind.activity.BaseActivity
+import com.vehiclecare.vc_driver_arvind.activity.callbacks.HomeCallback
 import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
@@ -18,6 +19,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     var errorMsg = MutableLiveData<String>("")
     var successMsg = MutableLiveData<String>("")
     var startAction = MutableLiveData<Boolean>()
+    lateinit var homeCallback: HomeCallback
 
     fun ackoLogin() {
         val phoneNumber = AppSharedPreference.getStringValue(AppSharedPreference.USER_PHONE)
@@ -103,7 +105,8 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
                 startAction.postValue(false)
 
                 if (response.body()?.status.equals("1") && response.body()?.responseCode.equals("200")) {
-                    successMsg.postValue("Trip is started")
+//                    successMsg.postValue("Trip Finished")
+                    homeCallback.tripEndSuccess()
                 } else if (!TextUtils.isEmpty(response.body()?.message)) {
                     errorMsg.postValue(response.body()?.message)
 

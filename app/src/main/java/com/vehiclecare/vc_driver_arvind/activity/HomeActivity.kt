@@ -7,11 +7,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.activity.callbacks.HomeCallback
 import com.vehiclecare.vc_driver_arvind.databinding.HomeActivityBinding
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import com.vehiclecare.vc_driver_arvind.viewmodels.HomeViewModel
 
-class HomeActivity : BaseActivity() {
+class HomeActivity : BaseActivity(), HomeCallback {
 
     private lateinit var homeActivityBinding: HomeActivityBinding
     private lateinit var homeViewModel: HomeViewModel
@@ -34,6 +35,8 @@ class HomeActivity : BaseActivity() {
         )
         homeViewModel = model
 
+        homeViewModel.homeCallback = this
+
     }
 
     override fun onStart() {
@@ -52,20 +55,9 @@ class HomeActivity : BaseActivity() {
         checkStartBtnState()
 
         homeActivityBinding.btnStartNewTrip.setOnClickListener {
+            Toast.makeText(this, "btn click", Toast.LENGTH_LONG).show()
+            handleTripEvent()
 
-            val ackoAutho =
-                AppSharedPreference.getStringValue(AppSharedPreference.USER_ACKO_AUTHORIZATION)
-            if (TextUtils.isEmpty(ackoAutho)) {
-                Toast.makeText(this, "Acko login error, please try later", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            if (canStartNewTrip) {
-                val intent = Intent(this, MapActivity::class.java)
-                startActivity(intent)
-            } else {
-                homeViewModel.endCurrentTrip(tripId)
-            }
         }
 
 
@@ -79,25 +71,50 @@ class HomeActivity : BaseActivity() {
             if (!TextUtils.isEmpty(it))
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
-        homeViewModel.successMsg.observe(this, {
-            if (!TextUtils.isEmpty(it)) {
-                AppSharedPreference.saveStringValue(AppSharedPreference.TRIP_ID, "")
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                checkStartBtnState()
-            }
-        })
+//        homeViewModel.successMsg.observe(this, {
+//            if (!TextUtils.isEmpty(it)) {
+//                AppSharedPreference.saveStringValue(AppSharedPreference.TRIP_ID, "")
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                checkStartBtnState()
+//            }
+//        })
     }
 
     fun checkStartBtnState() {
 
         tripId = AppSharedPreference.getStringValue(AppSharedPreference.TRIP_ID)!!
-        if (!TextUtils.isEmpty(tripId) &&  !tripId.equals("null")) {
+        if (!TextUtils.isEmpty(tripId) && !tripId.equals("null")) {
             homeActivityBinding.btnStartNewTrip.text = "End Current Trip"
             canStartNewTrip = false
         } else {
             homeActivityBinding.btnStartNewTrip.text = "Start New Trip"
             canStartNewTrip = true
         }
+    }
+
+    fun handleTripEvent() {
+        val ackoAutho =
+            AppSharedPreference.getStringValue(AppSharedPreference.USER_ACKO_AUTHORIZATION)
+        if (TextUtils.isEmpty(ackoAutho)) {
+            Toast.makeText(this, "Acko login error, please try later", Toast.LENGTH_LONG).show()
+            return
+        }
+        if (canStartNewTrip) {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        } else {
+            homeViewModel.endCurrentTrip(tripId)
+        }
+    }
+
+    override fun tripEnd() {
+
+    }
+
+    override fun tripEndSuccess() {
+        AppSharedPreference.saveStringValue(AppSharedPreference.TRIP_ID, "")
+        Toast.makeText(this, "Trip Ended", Toast.LENGTH_SHORT).show()
+        checkStartBtnState()
     }
 
 }

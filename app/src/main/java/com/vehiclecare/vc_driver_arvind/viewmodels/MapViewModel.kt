@@ -6,6 +6,7 @@ import android.location.Location
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.vehiclecare.vc_driver_arvind.activity.BaseActivity
+import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback
 import com.vehiclecare.vc_driver_arvind.model.tripStartData.TripStartResponse
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import org.json.JSONObject
@@ -27,8 +28,9 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
     lateinit var startAddress: Address
     lateinit var destLatLong: Location
     lateinit var destLatLongAddress: Address
+    lateinit var mapCallback: MapCallback
 
-    fun statTrip() {
+    fun statTrip(vehicleNo: String) {
 
         val user_id = AppSharedPreference.getStringValue(AppSharedPreference.USER_ID)
         val token = AppSharedPreference.getStringValue(AppSharedPreference.USER_TOKEN)
@@ -54,7 +56,7 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
             return
         }
 
-        if (TextUtils.isEmpty(vehicle_plate_number.value)) {
+        if (TextUtils.isEmpty(vehicleNo)) {
             errorMsg.postValue("Vehicle Plate Number is required, Please enter again")
             return
         }
@@ -91,7 +93,7 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
             USER_ACKO_AUTHORIZATION!!,
             time.toString(),
             tripType.value!!,
-            vehicle_plate_number.value!!, tripOrigin.toString(), tripDestination.toString()
+            vehicleNo, tripOrigin.toString(), tripDestination.toString()
         ).enqueue(object : Callback<TripStartResponse> {
             override fun onResponse(
                 call: Call<TripStartResponse>,
@@ -99,12 +101,15 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
             ) {
                 startAction.postValue(false)
                 if (response.body()?.status.equals("1") && response.body()?.responseCode.equals("200")) {
-                    successMsg.postValue("Trip is started")
-
+//                    successMsg.postValue("Trip is started")
                     AppSharedPreference.saveStringValue(
                         AppSharedPreference.TRIP_ID,
                         response.body()?.data?.tripData?.trip_id.toString()
                     )
+                    if (::mapCallback.isInitialized)
+                        mapCallback.tripStartedSuccess("Trip is started")
+
+
                 } else if (!TextUtils.isEmpty(response.body()?.message)) {
                     errorMsg.postValue(response.body()?.message)
 

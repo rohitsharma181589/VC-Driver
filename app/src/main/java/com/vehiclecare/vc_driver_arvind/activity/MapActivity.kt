@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.vehiclecare.vc_driver_arvind.BuildConfig
 import com.vehiclecare.vc_driver_arvind.R
+import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback
 import com.vehiclecare.vc_driver_arvind.activity.fragments.BottomSheetFragment
 import com.vehiclecare.vc_driver_arvind.databinding.MapActivityLayoutBinding
 import com.vehiclecare.vc_driver_arvind.utils.LocationHelper
@@ -29,7 +30,7 @@ import com.vehiclecare.vc_driver_arvind.viewmodels.MapViewModel
 
 class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     GoogleMap.OnMapLongClickListener,
-    GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener {
+    GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, MapCallback {
 
     private lateinit var mapViewModel: MapViewModel
     private lateinit var mapActivityLayoutBinding: MapActivityLayoutBinding
@@ -57,6 +58,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
             model
         )
         mapViewModel = model
+
+        mapViewModel.mapCallback= this
 
 
         if (!Places.isInitialized()) {
@@ -86,6 +89,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 //            }
 //        })
 
+        bottomSheetFragment = BottomSheetFragment(mapViewModel, this)
+
         locationHelper.startLocationButtonClick()
         showProgressDialog()
 
@@ -96,11 +101,11 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         super.onStart()
 
 
-        mapViewModel.clickAction.observe(this, {
-            if (it) {
-                mapViewModel.statTrip()
-            }
-        })
+//        mapViewModel.clickAction.observe(this, {
+//            if (it) {
+//                mapViewModel.statTrip()
+//            }
+//        })
 //
 //        mapViewModel.tripType.observe(this, {
 //
@@ -120,12 +125,12 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
             if (!TextUtils.isEmpty(it))
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
-        mapViewModel.successMsg.observe(this, {
-            if (!TextUtils.isEmpty(it)) {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        })
+//        mapViewModel.successMsg.observe(this, {
+//            if (!TextUtils.isEmpty(it)) {
+//                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//                finish()
+//            }
+//        })
 
     }
 
@@ -161,7 +166,7 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
             }
 
-            bottomSheetFragment = BottomSheetFragment(mapViewModel)
+
 //            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
@@ -179,7 +184,7 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     }
 
     override fun onCameraMoveStarted(p0: Int) {
-
+        bottomSheetFragment.dismiss()
     }
 
 
@@ -198,6 +203,9 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         mapViewModel.destLatLong.latitude = ltlng.latitude
         mapViewModel.destLatLong.longitude = ltlng.longitude
 
+
+        mMap.clear()
+
         mMap.addMarker(
             MarkerOptions()
                 .position(ltlng)
@@ -210,9 +218,21 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
     override fun onCameraIdle() {
         if (::bottomSheetFragment.isInitialized)
-            if (!bottomSheetFragment.isAdded) {
+            if (!bottomSheetFragment.isVisible) {
                 bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
             }
+    }
+
+    override fun tripStarted(s: String) {
+        mapViewModel.statTrip(s)
+    }
+
+    override fun tripStartedSuccess(s: String) {
+
+        if (!TextUtils.isEmpty(s)) {
+            Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
 

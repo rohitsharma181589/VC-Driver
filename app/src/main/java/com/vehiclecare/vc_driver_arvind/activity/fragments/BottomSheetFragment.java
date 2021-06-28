@@ -9,14 +9,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.vehiclecare.vc_driver_arvind.R;
+import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback;
 import com.vehiclecare.vc_driver_arvind.viewmodels.MapViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,11 +30,14 @@ import java.util.Objects;
 public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private final MapViewModel mapViewModel;
+    private MapCallback mapCallback;
 
 
-    public BottomSheetFragment(MapViewModel mapViewModel) {
+    public BottomSheetFragment(MapViewModel mapViewModel, MapCallback mapCallback) {
         this.mapViewModel = mapViewModel;
+        this.mapCallback = mapCallback;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,10 +95,54 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                 return;
             }
 
-            mapViewModel.getVehicle_plate_number().postValue(Objects.requireNonNull(vehicleNo.getText()).toString());
+//            mapViewModel.getVehicle_plate_number().postValue(Objects.requireNonNull(vehicleNo.getText()).toString());
 
-            mapViewModel.getClickAction().postValue(true);
+//            mapViewModel.getClickAction().postValue(true);
+            mapCallback.tripStarted(Objects.requireNonNull(vehicleNo.getText()).toString());
         });
+
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) view.getParent()).getLayoutParams();
+        CoordinatorLayout.Behavior behavior = params.getBehavior();
+
+        if (behavior instanceof BottomSheetBehavior) {
+            ((BottomSheetBehavior) behavior).addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    String state = "";
+
+                    switch (newState) {
+                        case BottomSheetBehavior.STATE_DRAGGING: {
+                            state = "DRAGGING";
+                            break;
+                        }
+                        case BottomSheetBehavior.STATE_SETTLING: {
+                            state = "SETTLING";
+                            break;
+                        }
+                        case BottomSheetBehavior.STATE_EXPANDED: {
+                            state = "EXPANDED";
+                            break;
+                        }
+                        case BottomSheetBehavior.STATE_COLLAPSED: {
+                            state = "COLLAPSED";
+                            break;
+                        }
+                        case BottomSheetBehavior.STATE_HIDDEN: {
+                            dismiss();
+                            state = "HIDDEN";
+                            break;
+                        }
+                    }
+
+                    Toast.makeText(getContext(), "Bottom Sheet State Changed to: " + state, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                }
+            });
+        }
 
     }
 
