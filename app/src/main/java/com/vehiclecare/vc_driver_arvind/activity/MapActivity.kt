@@ -7,6 +7,7 @@ import android.location.Address
 import android.location.Location
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,7 @@ import com.vehiclecare.vc_driver_arvind.BuildConfig
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback
 import com.vehiclecare.vc_driver_arvind.activity.fragments.BottomSheetFragment
+import com.vehiclecare.vc_driver_arvind.activity.fragments.FormFragment
 import com.vehiclecare.vc_driver_arvind.databinding.MapActivityLayoutBinding
 import com.vehiclecare.vc_driver_arvind.utils.LocationHelper
 import com.vehiclecare.vc_driver_arvind.utils.LocationUpdateCallBack
@@ -41,6 +43,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     private val TAG = MapActivity::class.java.canonicalName
 
     lateinit var bottomSheetFragment: BottomSheetFragment
+    lateinit var formFragment: FormFragment
+    var showForm = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +63,17 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         )
         mapViewModel = model
 
-        mapViewModel.mapCallback= this
+        mapViewModel.mapCallback = this
+
+
+//        formFragment= FormFragment()
+
+        mapActivityLayoutBinding.mcvShowForm.setOnClickListener {
+
+            if (::bottomSheetFragment.isInitialized && !bottomSheetFragment.isVisible) {
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            }
+        }
 
 
         if (!Places.isInitialized()) {
@@ -184,7 +198,7 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     }
 
     override fun onCameraMoveStarted(p0: Int) {
-        bottomSheetFragment.dismiss()
+//        bottomSheetFragment.dismiss()
     }
 
 
@@ -217,10 +231,12 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     }
 
     override fun onCameraIdle() {
-        if (::bottomSheetFragment.isInitialized)
-            if (!bottomSheetFragment.isVisible) {
-                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-            }
+
+        mapActivityLayoutBinding.mcvShowForm.visibility = View.VISIBLE
+//        if (::bottomSheetFragment.isInitialized)
+//            if (!bottomSheetFragment.isVisible) {
+//                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+//            }
     }
 
     override fun tripStarted(s: String) {

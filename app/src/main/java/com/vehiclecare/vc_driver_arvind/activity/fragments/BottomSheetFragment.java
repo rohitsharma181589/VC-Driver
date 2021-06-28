@@ -147,6 +147,11 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     @Override
+    public void dismiss() {
+        super.dismiss();
+    }
+
+    @Override
     public int getTheme() {
         return R.style.BottomSheetDialogTheme;
     }
