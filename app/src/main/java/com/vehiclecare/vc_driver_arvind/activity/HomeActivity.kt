@@ -50,6 +50,13 @@ class HomeActivity : BaseActivity(), HomeCallback {
         homeActivityBinding.rcvTrips.layoutManager = LinearLayoutManager(this)
 
 
+        homeActivityBinding.swipeRefresh.setOnRefreshListener {
+
+            homeViewModel.getAckoVehicleRide()
+
+        }
+
+
     }
 
     override fun onStart() {
@@ -92,6 +99,8 @@ class HomeActivity : BaseActivity(), HomeCallback {
         homeViewModel.errorMsg.observe(this, {
             if (!TextUtils.isEmpty(it))
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+
+            homeActivityBinding.swipeRefresh.isRefreshing = false
         })
 //        homeViewModel.successMsg.observe(this, {
 //            if (!TextUtils.isEmpty(it)) {
@@ -164,6 +173,7 @@ class HomeActivity : BaseActivity(), HomeCallback {
         tripListAdapter.clear()
         tripListAdapter.addAll(tripLst)
         tripAdapter.notifyDataSetChanged()
+        homeActivityBinding.swipeRefresh.isRefreshing = false
     }
 
 
