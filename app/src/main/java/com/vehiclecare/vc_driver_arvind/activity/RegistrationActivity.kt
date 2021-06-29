@@ -135,7 +135,7 @@ class RegistrationActivity : BaseActivity() {
                 this,
                 { view, year, monthOfYear, dayOfMonth ->
                     registrationViewModel.dob.value =
-                        dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year
+                        dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year
                 },
                 mYear,
                 mMonth,
