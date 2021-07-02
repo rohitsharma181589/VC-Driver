@@ -7,4 +7,6 @@
     <string name="self_drop_n_i_will_drop_my_car_myself">Self Drop. I will drop my car myself</string>
     <string name="menu_profile">Profile</string>
     <string name="home">Home</string>
+    <string name="places_autocomplete_search_hint">Search Destination</string>
+
 </resources>

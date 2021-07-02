@@ -7,10 +7,12 @@ import android.location.Address
 import android.location.Location
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,6 +21,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.vehiclecare.vc_driver_arvind.BuildConfig
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback
@@ -33,6 +39,8 @@ import com.vehiclecare.vc_driver_arvind.viewmodels.MapViewModel
 class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     GoogleMap.OnMapLongClickListener,
     GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, MapCallback {
+
+    private val AUTOCOMPLETE_REQUEST_CODE = 1
 
     private lateinit var mapViewModel: MapViewModel
     private lateinit var mapActivityLayoutBinding: MapActivityLayoutBinding
@@ -77,7 +85,7 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
 
         if (!Places.isInitialized()) {
-            Places.initialize(applicationContext, BuildConfig.MAPS_PLACES_API_KEY);
+            Places.initialize(applicationContext, BuildConfig.MAPS_PLACES_API_KEY_NEW);
         }
 
         val placesClient = Places.createClient(this)
@@ -87,9 +95,14 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
 //        val placedFragent =
 //            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
 //        placedFragent.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+//
+//        placedFragent.setTypeFilter(TypeFilter.CITIES);
+//
 //
 //        placedFragent.setOnPlaceSelectedListener(object : PlaceSelectionListener {
 //            override fun onPlaceSelected(place: Place) {

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingBottom="@dimen/_40dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/_40dp">
 
 
     <ImageView
@@ -16,6 +16,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_40dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginTop="@dimen/_40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/tv_places"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Search Place" />
+
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/mcv_showForm" />
+
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
         android:id="@+id/lbl_trip"
         android:layout_width="wrap_content"
@@ -25,7 +55,7 @@
         android:textColor="@color/dark_blue"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/mcv_places" />
 
 
     <RadioGroup
@@ -42,18 +72,18 @@
         <RadioButton
             android:id="@+id/rb_pickup"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/_20dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
             android:buttonTint="@color/btn_orange"
             android:checked="true"
             android:text="Pickup" />
 
         <RadioButton
             android:id="@+id/rb_drop"
-            android:layout_marginTop="@dimen/_20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_40dp"
+            android:layout_marginTop="@dimen/_20dp"
             android:buttonTint="@color/btn_orange"
             android:text="Drop" />
 
@@ -73,13 +103,13 @@
             android:id="@+id/vehicleNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:hint=" Enter Vehicle Plate Number"
-            android:paddingBottom="@dimen/_10dp"
             android:background="@color/white"
-            android:textColorHint="@color/grey"
+            android:hint=" Enter Vehicle Plate Number"
+            android:imeOptions="actionDone"
             android:inputType="textCapCharacters"
+            android:paddingBottom="@dimen/_10dp"
             android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             tools:text="kahsdfkjadfhl" />
 
 
