@@ -4,6 +4,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -19,38 +20,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mcv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/red"
-                app:cardCornerRadius="@dimen/dimen_5dp"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="@dimen/_10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="VC"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dimen_20sp" />
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <TextView
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_gravity="center_vertical"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
-                android:text="VC Driver Partner"
+                android:src="@drawable/ic_vcd_4"
                 android:textColor="@color/red"
-                app:layout_constraintBottom_toBottomOf="@+id/mcv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/mcv"
-                app:layout_constraintTop_toTopOf="@+id/mcv" />
+
+                />
 
         </LinearLayout>
 
