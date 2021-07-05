@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.databinding.ItemTripsBinding
 import com.vehiclecare.vc_driver_arvind.model.getAckoVehicleRide.TripDatum
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,8 +34,29 @@ class TripAdapter(var tripsData: ArrayList<TripDatum>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val tripData = tripsData[position]
+        holder.itemTripsBinding.tripData = tripData
 
-        holder.itemTripsBinding.tripData = tripsData[position]
+
+        if (tripData.startDate != null) {
+            val date: Date = SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                Locale.getDefault()
+            ).parse(tripData.startDate)
+            val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm a", Locale.getDefault())
+            val formattedDate: String = targetFormat.format(date)
+            holder.itemTripsBinding.tvStartDate.text = "Start Date: " + formattedDate
+        }
+
+        if (tripData.endDate != null) {
+            val date: Date = SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                Locale.getDefault()
+            ).parse(tripData.endDate)
+            val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm a", Locale.getDefault())
+            val formattedDate: String = targetFormat.format(date)
+            holder.itemTripsBinding.tvEndDate.text = "End Date: " + formattedDate
+        } else holder.itemTripsBinding.tvEndDate.text = "End Date: "
 
     }
 
@@ -53,7 +75,8 @@ class TripAdapter(var tripsData: ArrayList<TripDatum>) :
                     for (row in allTripData) {
                         if (row.licensePlateNumber.lowercase(Locale.getDefault()).contains(
                                 charString.lowercase(Locale.getDefault())
-                            )) {
+                            )
+                        ) {
                             filteredList.add(row)
                         }
                     }

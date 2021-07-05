@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5dp"
                 android:layout_marginTop="@dimen/_5dp"
-                android:text="@{tripData.startDate}"
+
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/gd"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,6 @@
                 android:layout_marginTop="@dimen/_5dp"
                 android:gravity="end"
                 android:layout_marginEnd="@dimen/_5dp"
-                android:text="@{tripData.endDate}"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/gd"

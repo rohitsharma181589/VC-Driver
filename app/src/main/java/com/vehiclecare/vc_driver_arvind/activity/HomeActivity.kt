@@ -77,10 +77,10 @@ class HomeActivity : BaseActivity(), HomeCallback {
         })
 
         //check btn status
-        checkStartBtnState()
+//        checkStartBtnState()
 
         homeActivityBinding.btnStartNewTrip.setOnClickListener {
-            Toast.makeText(this, "btn click", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Opening Map", Toast.LENGTH_LONG).show()
             handleTripEvent()
 
         }
@@ -97,6 +97,8 @@ class HomeActivity : BaseActivity(), HomeCallback {
 
         })
         homeViewModel.errorMsg.observe(this, {
+
+            hideProgressDialog()
             if (!TextUtils.isEmpty(it))
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
@@ -134,14 +136,27 @@ class HomeActivity : BaseActivity(), HomeCallback {
 
     fun checkStartBtnState() {
 
-        tripId = AppSharedPreference.getStringValue(AppSharedPreference.TRIP_ID)!!
-        if (!TextUtils.isEmpty(tripId) && !tripId.equals("null")) {
-            homeActivityBinding.btnStartNewTrip.text = "End Current Trip"
-            canStartNewTrip = false
+        if (tripListAdapter.size > 0) {
+            if (tripListAdapter.get(0).endDate == null) {
+                homeActivityBinding.btnStartNewTrip.text = "End Current Trip"
+                canStartNewTrip = false
+            } else {
+                homeActivityBinding.btnStartNewTrip.text = "Start New Trip"
+                canStartNewTrip = true
+            }
         } else {
             homeActivityBinding.btnStartNewTrip.text = "Start New Trip"
             canStartNewTrip = true
         }
+
+//        tripId = AppSharedPreference.getStringValue(AppSharedPreference.TRIP_ID)!!
+//        if (!TextUtils.isEmpty(tripId) && !tripId.equals("null")) {
+//            homeActivityBinding.btnStartNewTrip.text = "End Current Trip"
+//            canStartNewTrip = false
+//        } else {
+//            homeActivityBinding.btnStartNewTrip.text = "Start New Trip"
+//            canStartNewTrip = true
+//        }
     }
 
     fun handleTripEvent() {
@@ -166,14 +181,19 @@ class HomeActivity : BaseActivity(), HomeCallback {
     override fun tripEndSuccess() {
         AppSharedPreference.saveStringValue(AppSharedPreference.TRIP_ID, "")
         Toast.makeText(this, "Trip Ended", Toast.LENGTH_SHORT).show()
-        checkStartBtnState()
+//        checkStartBtnState()//todo call get trip list
+        showProgressDialog()
+        homeViewModel.getAckoVehicleRide()
     }
 
     override fun tripListData(tripLst: MutableList<TripDatum>) {
+        hideProgressDialog()
         tripListAdapter.clear()
         tripListAdapter.addAll(tripLst)
         tripAdapter.notifyDataSetChanged()
         homeActivityBinding.swipeRefresh.isRefreshing = false
+
+        checkStartBtnState()
     }
 
 

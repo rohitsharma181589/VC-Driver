@@ -45,7 +45,7 @@
                 android:layout_gravity="center_vertical"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
-                android:text="Vehicle Care"
+                android:text="VC Driver Partner"
                 android:textColor="@color/red"
                 app:layout_constraintBottom_toBottomOf="@+id/mcv"
                 app:layout_constraintEnd_toEndOf="parent"

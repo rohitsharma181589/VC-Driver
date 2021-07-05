@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_10dp"
                 android:text="Show Form"
+                android:textStyle="bold"
                 android:textColor="@color/dark_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

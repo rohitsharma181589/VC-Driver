@@ -48,6 +48,7 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     lateinit var bottomSheetFragment: BottomSheetFragment
     lateinit var formFragment: FormFragment
     var showForm = false
+    var firstTimeshowForm = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -171,12 +172,11 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
     @SuppressLint("MissingPermission")
     override fun currentLocation(location: Location?) {
-        if (location != null) {
-            mapViewModel.startLatLong = location
-        }
+
         hideProgressDialog()
         if (location != null) {
             mLocation = location
+            mapViewModel.startLatLong = location
 
             if (::mMap.isInitialized) {
                 val locations = LatLng(location.latitude, location.longitude)
@@ -190,6 +190,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
 
 //            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+
+
         }
     }
 
@@ -222,17 +224,21 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
     override fun onMapLongClick(ltlng: LatLng) {
 
-
         placeMarkerAndGetAddress(ltlng)
     }
 
     override fun onCameraIdle() {
 
         mapActivityLayoutBinding.mcvShowForm.visibility = View.VISIBLE
-//        if (::bottomSheetFragment.isInitialized)
-//            if (!bottomSheetFragment.isVisible) {
-//                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-//            }
+
+        if (firstTimeshowForm) {
+            firstTimeshowForm = false
+            if (::bottomSheetFragment.isInitialized)
+                if (!bottomSheetFragment.isVisible) {
+                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                }
+        }
+
     }
 
     override fun tripStarted(s: String) {
