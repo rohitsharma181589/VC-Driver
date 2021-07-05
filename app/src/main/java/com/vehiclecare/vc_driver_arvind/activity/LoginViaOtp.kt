@@ -97,12 +97,10 @@ class LoginViaOtp : BaseActivity() {
                         if (null != it.loginData?.user)
                             saveUserData(it.loginData?.user!!)
 
-                        startActivity(
-                            Intent(
-                                this@LoginViaOtp,
-                                HomeActivity::class.java
-                            )
-                        ).also { finish() }
+                        val intent = Intent(this@LoginViaOtp, HomeActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
                     }
                 }
             }

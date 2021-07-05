@@ -80,7 +80,7 @@ class HomeActivity : BaseActivity(), HomeCallback {
 //        checkStartBtnState()
 
         homeActivityBinding.btnStartNewTrip.setOnClickListener {
-            Toast.makeText(this, "Opening Map", Toast.LENGTH_LONG).show()
+
             handleTripEvent()
 
         }
@@ -137,16 +137,19 @@ class HomeActivity : BaseActivity(), HomeCallback {
     fun checkStartBtnState() {
 
         if (tripListAdapter.size > 0) {
-            if (tripListAdapter.get(0).endDate == null) {
+            if (tripListAdapter[0].endDate == null) {
+                tripId = tripListAdapter[0].tripId
                 homeActivityBinding.btnStartNewTrip.text = "End Current Trip"
                 canStartNewTrip = false
             } else {
                 homeActivityBinding.btnStartNewTrip.text = "Start New Trip"
                 canStartNewTrip = true
+                tripId = ""
             }
         } else {
             homeActivityBinding.btnStartNewTrip.text = "Start New Trip"
             canStartNewTrip = true
+            tripId = ""
         }
 
 //        tripId = AppSharedPreference.getStringValue(AppSharedPreference.TRIP_ID)!!
@@ -167,11 +170,12 @@ class HomeActivity : BaseActivity(), HomeCallback {
             return
         }
         if (canStartNewTrip) {
+            Toast.makeText(this, "Opening Map", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
-        } else {
+        } else if (!TextUtils.isEmpty(tripId)) {
             homeViewModel.endCurrentTrip(tripId)
-        }
+        } else Toast.makeText(this, "No Trip to end", Toast.LENGTH_SHORT).show()
     }
 
     override fun tripEnd() {
