@@ -2,14 +2,12 @@ package com.vehiclecare.vc_driver_arvind.activity.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -52,20 +50,34 @@ class BottomSheetFragment(
 
         val placedFragent =
             childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
-        placedFragent.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        placedFragent.setPlaceFields(
+            listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.LAT_LNG,
+                Place.Field.ADDRESS,
+                Place.Field.ADDRESS_COMPONENTS
+            )
+        )
 
-        placedFragent.setTypeFilter(TypeFilter.CITIES);
+//        placedFragent.setTypeFilter(TypeFilter.CITIES);
+        placedFragent.setCountries("IND");
+
+
+        tv_places.text = mapViewModel.destinationString.value
 
 
         placedFragent.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                tv_places.text = place.name
-                Log.i(TAG, "Place: " + place.name + ", " + place.id)
+                tv_places.text = "Destination: ${place.name}"
+                mapViewModel.destinationString.postValue("Destination: ${place.name}")
+//                Log.i(TAG, "Place: " + place.name + ", " + place.id)
+                mapCallback.placesSelection(place)
             }
 
             override fun onError(status: Status) {
 
-                Log.i(TAG, "An error occurred: $status")
+
             }
         })
 

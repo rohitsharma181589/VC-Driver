@@ -7,12 +7,10 @@ import android.location.Address
 import android.location.Location
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,9 +20,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.vehiclecare.vc_driver_arvind.BuildConfig
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback
@@ -205,9 +200,10 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     }
 
     override fun markerAddress(address: Address?) {
+        hideProgressDialog()
         if (address != null) {
             mapViewModel.destLatLongAddress = address
-        }
+        } else mapViewModel.errorMsg.postValue("Please create destination marker location in map, by long pressing on map")
     }
 
     override fun onCameraMoveStarted(p0: Int) {
@@ -226,21 +222,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
     override fun onMapLongClick(ltlng: LatLng) {
 
-        mapViewModel.destLatLong = Location("")
-        mapViewModel.destLatLong.latitude = ltlng.latitude
-        mapViewModel.destLatLong.longitude = ltlng.longitude
 
-
-        mMap.clear()
-
-        mMap.addMarker(
-            MarkerOptions()
-                .position(ltlng)
-                .title("Destination")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-        )
-
-        locationHelper.getAddressForLatLong(mapViewModel.destLatLong);
+        placeMarkerAndGetAddress(ltlng)
     }
 
     override fun onCameraIdle() {
@@ -262,6 +245,39 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
             Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    override fun placesSelection(s: Place) {
+        if (null != s.latLng) {
+            placeMarkerAndGetAddress(s.latLng!!)
+
+            if (::mMap.isInitialized) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(s.latLng, zoomLevel))
+            }
+
+        } else mapViewModel.errorMsg.postValue("Please create destination marker location in map, by long pressing on map")
+    }
+
+
+    private fun placeMarkerAndGetAddress(ltlng: LatLng) {
+
+        mapViewModel.destLatLong = Location("")
+        mapViewModel.destLatLong.latitude = ltlng.latitude
+        mapViewModel.destLatLong.longitude = ltlng.longitude
+
+        if (::mMap.isInitialized) {
+            mMap.clear()
+
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(ltlng)
+                    .title("Destination")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+            )
+
+        }
+        showProgressDialog()
+        locationHelper.getAddressForLatLong(mapViewModel.destLatLong);
     }
 
 

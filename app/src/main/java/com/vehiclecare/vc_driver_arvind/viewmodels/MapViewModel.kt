@@ -19,6 +19,7 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
 
 
     var tripType = MutableLiveData<String>("pickup")
+    var destinationString = MutableLiveData<String>("")
     var vehicle_plate_number = MutableLiveData<String>("")
     var errorMsg = MutableLiveData<String>("")
     var successMsg = MutableLiveData<String>("")
@@ -81,7 +82,7 @@ class MapViewModel @Inject constructor() : BaseViewModel() {
         tripDestination.put("latitude", destLatLongAddress.latitude)
         tripDestination.put("longitude", destLatLongAddress.longitude)
         tripDestination.put("address", destLatLongAddress.getAddressLine(0))
-        tripDestination.put("city", destLatLongAddress.locality)
+        tripDestination.put("city", destLatLongAddress.subAdminArea)
 
 
         startAction.postValue(true)

@@ -257,15 +257,15 @@ public class LocationHelper {
 
             if (addresses.size() > 0) {
                 for (Address address : addresses) {
-                    if (address.getLocality() != null && address.getPostalCode() != null) {
+                    if (address.getSubAdminArea() != null && address.getPostalCode() != null) {
                         if (locationUpdateCallBack != null)
                             locationUpdateCallBack.markerAddress(address);
                         break;
-                    }
+                    } else locationUpdateCallBack.onError("Can't get marker location");
                 }
-            } else locationUpdateCallBack.onError("Cant not get marker location");
+            } else locationUpdateCallBack.onError("Can't get marker location");
         } catch (IOException e) {
-            locationUpdateCallBack.onError("Cant not get marker location");
+            locationUpdateCallBack.onError("Can't  get marker location");
         }
     }
 
