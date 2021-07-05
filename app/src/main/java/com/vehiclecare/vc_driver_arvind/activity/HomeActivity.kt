@@ -144,7 +144,7 @@ class HomeActivity : BaseActivity(), HomeCallback {
         }
     }
 
-    fun checkStartBtnState() {
+    fun checkStartBtnState(): Boolean {
 
         if (tripListAdapter.size > 0) {
             if (tripListAdapter[0].endDate == null) {
@@ -161,6 +161,8 @@ class HomeActivity : BaseActivity(), HomeCallback {
             canStartNewTrip = true
             tripId = ""
         }
+
+        return canStartNewTrip
 
 //        tripId = AppSharedPreference.getStringValue(AppSharedPreference.TRIP_ID)!!
 //        if (!TextUtils.isEmpty(tripId) && !tripId.equals("null")) {
@@ -207,21 +209,26 @@ class HomeActivity : BaseActivity(), HomeCallback {
         tripAdapter.notifyDataSetChanged()
         homeActivityBinding.swipeRefresh.isRefreshing = false
 
-        checkStartBtnState()
-
-
+        if (!checkStartBtnState() && openMapActivity) {
+            openMapActivity = false
+            intent = null
+            Toast.makeText(this, "Please end your previous trip", Toast.LENGTH_SHORT).show()
+        }
+        else if (checkStartBtnState() && openMapActivity) {
+            openMapWithIntent()
+        }
     }
 
     override fun openMapWithAckoLogin() {
-        openMapWithIntent()
+//        openMapWithIntent()
     }
 
 
     private fun openMapWithIntent() {
         if (openMapActivity) {
             if (::lat.isInitialized && ::long.isInitialized) {
-                openMapActivity= false
-                intent= null
+                openMapActivity = false
+                intent = null
                 val intent = Intent(this, MapActivity::class.java)
                 intent.putExtra(AppSharedPreference.GEO_DATA_LAT, lat)
                 intent.putExtra(AppSharedPreference.GEO_DATA_LONG, long)

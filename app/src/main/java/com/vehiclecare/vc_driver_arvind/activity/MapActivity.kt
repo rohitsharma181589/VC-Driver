@@ -174,9 +174,10 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
 
         mMap.setOnMapLongClickListener(this)
 
-        if (openMapActivity) {
+        if (openMapActivity && !TextUtils.isEmpty(lat) && !TextUtils.isEmpty(long)) {
             val latLng = LatLng(lat.toDouble(), long.toDouble())
             placeMarkerAndGetAddress(latLng)
+
         }
 
 
@@ -223,6 +224,8 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         hideProgressDialog()
         if (address != null) {
             mapViewModel.destLatLongAddress = address
+            if (openMapActivity)
+                mapViewModel.destinationString.value = address.getAddressLine(0)
         } else mapViewModel.errorMsg.postValue("Please create destination marker location in map, by long pressing on map")
     }
 

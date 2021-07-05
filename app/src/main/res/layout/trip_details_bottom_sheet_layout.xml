@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_40dp"
-        android:layout_marginEnd="@dimen/_40dp"
         android:layout_marginTop="@dimen/_40dp"
+        android:layout_marginEnd="@dimen/_40dp"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -43,13 +43,14 @@
 
     <TextView
         android:id="@+id/tv_places"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_20dp"
         android:text="Destination: "
         android:textColor="@color/dark_blue"
         android:textStyle="bold"
         android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mcv_places" />
 
