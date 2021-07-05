@@ -25,9 +25,19 @@ class HomeActivity : BaseActivity(), HomeCallback {
     var tripId = ""
     private lateinit var tripAdapter: TripAdapter
     var tripListAdapter = ArrayList<TripDatum>()
+    private var openMapActivity = false
+    lateinit var lat: String
+    lateinit var long: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        openMapActivity = intent.hasExtra(AppSharedPreference.GEO_DATA_LONG)
+
+        if (openMapActivity) {
+            lat = intent.getStringExtra(AppSharedPreference.GEO_DATA_LAT).toString()
+            long = intent.getStringExtra(AppSharedPreference.GEO_DATA_LONG).toString()
+        }
 
         homeActivityBinding =
             DataBindingUtil.setContentView(this, R.layout.home_activity)
@@ -198,6 +208,26 @@ class HomeActivity : BaseActivity(), HomeCallback {
         homeActivityBinding.swipeRefresh.isRefreshing = false
 
         checkStartBtnState()
+
+
+    }
+
+    override fun openMapWithAckoLogin() {
+        openMapWithIntent()
+    }
+
+
+    private fun openMapWithIntent() {
+        if (openMapActivity) {
+            if (::lat.isInitialized && ::long.isInitialized) {
+                openMapActivity= false
+                intent= null
+                val intent = Intent(this, MapActivity::class.java)
+                intent.putExtra(AppSharedPreference.GEO_DATA_LAT, lat)
+                intent.putExtra(AppSharedPreference.GEO_DATA_LONG, long)
+                startActivity(intent)
+            }
+        }
     }
 
 

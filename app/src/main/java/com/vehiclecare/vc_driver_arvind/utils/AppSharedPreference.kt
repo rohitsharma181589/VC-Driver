@@ -16,6 +16,8 @@ object AppSharedPreference {
     private const val PRIVATE_MODE = 0
 
     const val IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN"
+    const val GEO_DATA_LAT = "geo_data_lat"
+    const val GEO_DATA_LONG = "geo_data_long"
     const val USER_TOKEN = "USER_TOKEN"
     const val USER_ACKO_AUTHORIZATION = "USER_ACKO_AUTHORIZATION"
     const val USER_FName = "USER_FName"

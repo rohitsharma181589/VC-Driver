@@ -26,6 +26,7 @@ import com.vehiclecare.vc_driver_arvind.activity.callbacks.MapCallback
 import com.vehiclecare.vc_driver_arvind.activity.fragments.BottomSheetFragment
 import com.vehiclecare.vc_driver_arvind.activity.fragments.FormFragment
 import com.vehiclecare.vc_driver_arvind.databinding.MapActivityLayoutBinding
+import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import com.vehiclecare.vc_driver_arvind.utils.LocationHelper
 import com.vehiclecare.vc_driver_arvind.utils.LocationUpdateCallBack
 import com.vehiclecare.vc_driver_arvind.viewmodels.MapViewModel
@@ -49,6 +50,9 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
     lateinit var formFragment: FormFragment
     var showForm = false
     var firstTimeshowForm = true
+    lateinit var lat: String
+    lateinit var long: String
+    private var openMapActivity = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +72,14 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         mapViewModel = model
 
         mapViewModel.mapCallback = this
+
+
+        openMapActivity = intent.hasExtra(AppSharedPreference.GEO_DATA_LONG)
+
+        if (openMapActivity) {
+            lat = intent.getStringExtra(AppSharedPreference.GEO_DATA_LAT).toString()
+            long = intent.getStringExtra(AppSharedPreference.GEO_DATA_LONG).toString()
+        }
 
 
 //        formFragment= FormFragment()
@@ -161,6 +173,12 @@ class MapActivity : BaseActivity(), LocationUpdateCallBack, OnMapReadyCallback,
         mMap = googleMap
 
         mMap.setOnMapLongClickListener(this)
+
+        if (openMapActivity) {
+            val latLng = LatLng(lat.toDouble(), long.toDouble())
+            placeMarkerAndGetAddress(latLng)
+        }
+
 
     }
 

@@ -7,4 +7,5 @@ interface HomeCallback {
     fun tripEnd()
     fun tripEndSuccess()
     fun tripListData(tripLst: MutableList<TripDatum>)
+    fun openMapWithAckoLogin()
 }

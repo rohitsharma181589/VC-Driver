@@ -52,6 +52,8 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
                             AppSharedPreference.USER_ACKO_AUTHORIZATION,
                             response.body()?.data?.ackoData?.accessToken!!
                         )
+
+                        homeCallback.openMapWithAckoLogin()
                     }
                 }
 
