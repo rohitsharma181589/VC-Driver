@@ -135,11 +135,11 @@
             android:backgroundTint="@android:color/white"
             android:editable="false"
             android:enabled="false"
-
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/_20dp"
             android:text="(+91) India"
             android:textColor="@color/white"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,25 +147,59 @@
             app:layout_constraintVertical_bias="0.7" />
 
 
-        <EditText
-            android:id="@+id/ed_number"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/ll_phone"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="@dimen/_20dp"
-            android:layout_marginEnd="40dp"
-            android:backgroundTint="@android:color/white"
-            android:gravity="center_horizontal"
-            android:inputType="phone"
-            android:paddingBottom="@dimen/_20dp"
-            android:singleLine="true"
-            android:text="@={loginViewMdel.userPhone}"
-            android:textColor="@color/white"
+            android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_lbl"
-            app:layout_constraintVertical_bias="0.7"
-            tools:text="(+91) India" />
+            app:layout_constraintTop_toBottomOf="@+id/ed_lbl">
+
+            <TextView
+                android:id="@+id/tv_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(+91) "
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_16sp"
+                android:layout_marginEnd="@dimen/_5dp"
+                app:layout_constraintEnd_toStartOf="@+id/ed_number"
+                app:layout_constraintTop_toTopOf="@+id/ed_number"
+                app:layout_constraintVertical_bias="0.7" />
+
+
+            <EditText
+                android:id="@+id/ed_number"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/_5dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@android:color/white"
+                android:gravity="start"
+                android:hint="Enter Your Number"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:text="@={loginViewMdel.userPhone}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_lbl"
+                tools:text="(+91) India" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="@dimen/_1dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="@+id/ll_phone"
+            app:layout_constraintStart_toStartOf="@+id/ll_phone"
+            app:layout_constraintTop_toBottomOf="@+id/ll_phone" />
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_continue"
@@ -179,7 +213,7 @@
             app:contentPadding="@dimen/_10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_number">
+            app:layout_constraintTop_toBottomOf="@+id/ll_phone">
 
 
             <TextView

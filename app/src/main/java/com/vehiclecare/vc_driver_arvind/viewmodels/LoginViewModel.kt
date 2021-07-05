@@ -11,7 +11,7 @@ class LoginViewModel @Inject constructor(): BaseViewModel() {
 
     init {
         loginClickSubject = PublishSubject.create()
-        userPhone = MutableLiveData("9560162992")
+        userPhone = MutableLiveData("")
     }
 
 
