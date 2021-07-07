@@ -8,6 +8,8 @@ import com.vehiclecare.vc_driver_arvind.activity.callbacks.HomeCallback
 import com.vehiclecare.vc_driver_arvind.model.BaseModel
 import com.vehiclecare.vc_driver_arvind.model.ackoLoginData.AckoLoginResponse
 import com.vehiclecare.vc_driver_arvind.model.getAckoVehicleRide.GetAckoVehicleRideResponse
+import com.vehiclecare.vc_driver_arvind.model.getAckoVehicleRide.TripDatum
+import com.vehiclecare.vc_driver_arvind.model.tripStartData.TripData
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
 import retrofit2.Call
 import retrofit2.Callback
@@ -154,6 +156,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
                         if (response.body()?.data?.tripData != null && response.body()?.data?.tripData!!.size > 0) {
                             homeCallback.tripListData(response.body()?.data?.tripData!!)
                         } else if (!TextUtils.isEmpty(response.body()?.message)) {
+                            homeCallback.tripListData(ArrayList(0))
                             errorMsg.postValue("No Trip Data Found")
                         }
                     } else errorMsg.postValue("Something went wrong, please try again")

@@ -5,7 +5,8 @@
 #include <jni.h>
 #include <string>
 
-std::string hello = "v8cebfbf744062c00aa85dabcc68c08d0c";
+//std::string hello = "v8cebfbf744062c00aa85dabcc68c08d0c";//Development
+std::string hello = "vprod8cebfbf744062c00aa85dabcc68c08d0c";//production
 
 
 //extern "C" JNIEXPORT jstring JNICALL
@@ -56,6 +57,7 @@ JNIEXPORT jstring JNICALL
 Java_com_vehiclecare_vc_1driver_1arvind_network_RetrofitClient_baseUrlFromJNI(JNIEnv *env,
                                                                               jclass clazz) {
 //    std::string baseURL = "https://api.vehiclecare.in/";
-    std::string baseURL = "https://devapi.vehiclecare.in/";
+//    std::string baseURL = "https://devapi.vehiclecare.in/";
+    std::string baseURL = "https://api.vehiclecare.in/";
     return env->NewStringUTF(baseURL.c_str());
 }

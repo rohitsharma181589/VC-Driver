@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -107,7 +108,8 @@ class RegistrationActivity : BaseActivity() {
         })
 
         registrationViewModel.genderError.observe(this, {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            if (!TextUtils.isEmpty(it))
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
 
 

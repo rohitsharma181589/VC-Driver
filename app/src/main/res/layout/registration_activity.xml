@@ -12,8 +12,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
 
         <LinearLayout
@@ -26,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_20dp"
                 android:text="Registration"
-                android:textColor="@color/black"
                 android:textSize="@dimen/_24sp" />
 
 
@@ -40,7 +38,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="Full Name"
                     android:text="@={registrationVariable.firstName}"
                     tools:text="kahsdfkjadfhl" />
@@ -57,7 +55,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:text="@={registrationVariable.email}"
@@ -75,7 +73,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+
+                    android:background="@android:color/transparent"
                     android:editable="false"
                     android:enabled="false"
                     android:hint="Phone"
@@ -114,6 +113,7 @@
                     android:id="@+id/rb_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:layout_marginStart="@dimen/_40dp"
                     android:buttonTint="@color/btn_orange"
                     android:text="Female" />
@@ -146,7 +146,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="Address"
                     android:text="@={registrationVariable.address}"
                     tools:text="kahsdfkjadfhl" />
@@ -163,7 +163,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="State"
                     android:text="@={registrationVariable.state}"
                     tools:text="kahsdfkjadfhl" />
@@ -180,7 +180,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="City"
                     android:text="@={registrationVariable.city}"
                     tools:text="kahsdfkjadfhl" />
@@ -197,7 +197,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="PinCode"
                     android:inputType="number"
                     android:text="@={registrationVariable.pinCode}"
@@ -215,7 +215,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="Licence Number"
                     android:inputType="textCapWords"
                     android:text="@={registrationVariable.licenceNo}"
@@ -232,7 +232,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@android:color/transparent"
                     android:hint="Aadhar Number"
                     android:inputType="textCapWords"
                     android:text="@={registrationVariable.aadharNo}"
