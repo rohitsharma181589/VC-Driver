@@ -39,21 +39,27 @@ class TripAdapter(var tripsData: ArrayList<TripDatum>) :
 
 
         if (tripData.startDate != null) {
-            val date: Date = SimpleDateFormat(
+            val utcTimeZone = SimpleDateFormat(
                 "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
                 Locale.getDefault()
-            ).parse(tripData.startDate)
+            )
+            utcTimeZone.timeZone = TimeZone.getTimeZone("UTC")
+            val date: Date = utcTimeZone.parse(tripData.startDate)
             val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm a", Locale.getDefault())
+            targetFormat.timeZone = TimeZone.getTimeZone("Asia/Kolkata")
             val formattedDate: String = targetFormat.format(date)
             holder.itemTripsBinding.tvStartDate.text = "Start Date: " + formattedDate
         }
 
         if (tripData.endDate != null) {
-            val date: Date = SimpleDateFormat(
+            val utcTimeZone = SimpleDateFormat(
                 "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
                 Locale.getDefault()
-            ).parse(tripData.endDate)
+            )
+            utcTimeZone.timeZone = TimeZone.getTimeZone("UTC")
+            val date: Date = utcTimeZone.parse(tripData.endDate)
             val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm a", Locale.getDefault())
+            targetFormat.timeZone = TimeZone.getTimeZone("Asia/Kolkata")
             val formattedDate: String = targetFormat.format(date)
             holder.itemTripsBinding.tvEndDate.text = "End Date: " + formattedDate
         } else holder.itemTripsBinding.tvEndDate.text = "End Date: "
