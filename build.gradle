@@ -13,6 +13,8 @@ buildscript {
         // in the individual module build.gradle files
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:1.3.0"
 
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+
 //        compile 'com.google.android.gms:play-services:12.0.1'
 
     }
