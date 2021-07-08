@@ -5,14 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.vehiclecare.vc_driver_arvind.R
 import com.vehiclecare.vc_driver_arvind.model.LogoutModel
 import com.vehiclecare.vc_driver_arvind.utils.AppSharedPreference
@@ -61,6 +62,8 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         progressTv.textSize = 19F
         progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setCancelable(true)
+
+
     }
 
 
@@ -68,6 +71,11 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         super.onStart()
 
         EventBus.getDefault().register(this)
+
+        val userId = AppSharedPreference.getStringValue(AppSharedPreference.USER_ID)
+
+        if (!TextUtils.isEmpty(userId))
+            FirebaseCrashlytics.getInstance().setUserId(userId!!)
     }
 
     override fun onStop() {
@@ -119,7 +127,6 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
             .show()
         logoutAndClearData()
     }
-
 
 
 }
