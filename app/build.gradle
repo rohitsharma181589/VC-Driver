@@ -22,7 +22,7 @@ android {
             keyAlias 'arvind'
             keyPassword 'arvind'
 //            storeFile file('/Users/bookmyforex/Desktop/AndroidKeyStore/bmf-android_credentials/BookMyForex.keystore')
-            storeFile file('E:\\VCApps\\VCDriver\\finalJks.jks')
+//            storeFile file('E:\\VCApps\\VCDriver\\finalJks.jks')
 
             storePassword 'arvind'
         }
